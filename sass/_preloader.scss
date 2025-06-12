@@ -14,6 +14,33 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    animation: expandCircle 0.8s ease-out forwards;
+  }
+  
+  &.contract::before {
+    animation: contractCircle 0.6s ease-in forwards;
+  }
+  
+  .preloader-content {
+    opacity: 0;
+    animation: fadeInContent 0.5s ease-out 0.4s forwards;
+  }
+  
+  &.contract .preloader-content {
+    animation: fadeOutContent 0.3s ease-in forwards;
+  }
   .loading {
     display: flex;
   }
@@ -22,7 +49,7 @@
     padding-right: 15px;
   }
   .spinner {
-    animation: spinner 3s infinite linear;
+    animation: spinner 1.5s infinite ease-in-out;
     border-radius: 50%;
     border: 3px solid #f1f6f8;
     border-left-color: $primary-color;
@@ -44,6 +71,7 @@
       right: 31px;
       top: 41px;
       border-radius: 50%;
+      animation: pulse 2s infinite ease-in-out;
       @media (max-width: 576px) {
         top: 18px;
       }
@@ -66,6 +94,10 @@
     @media (max-width: 576px) {
       width: 155px;
       height: 155px;
+    }
+    
+    .text img {
+      animation: gentle-bounce 3s infinite ease-in-out;
     }
     h4 {
       font-size: 30px;
@@ -104,7 +136,77 @@
 }
 
 @keyframes spinner {
-  to {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  50% {
+    transform: rotateZ(180deg);
+  }
+  100% {
     transform: rotateZ(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes gentle-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes expandCircle {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  100% {
+    width: 200vmax;
+    height: 200vmax;
+  }
+}
+
+@keyframes contractCircle {
+  0% {
+    width: 200vmax;
+    height: 200vmax;
+  }
+  100% {
+    width: 0;
+    height: 0;
+  }
+}
+
+@keyframes fadeInContent {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOutContent {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
   }
 }

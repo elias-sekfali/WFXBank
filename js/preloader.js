@@ -14,9 +14,11 @@
 
   $(window).on("load", function () {
     setTimeout(function () {
-      $("#preloader").fadeOut(10, function () {
-        $("#preloader").removeClass("loading");
-      });
-    }, 500);
+      $("#preloader").addClass("contract");
+      setTimeout(function () {
+        $("#preloader").hide();
+        $("#preloader").removeClass("loading contract");
+      }, 600);
+    }, 300);
   });
 })(jQuery);
