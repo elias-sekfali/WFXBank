@@ -35,7 +35,7 @@
   <meta charset="utf-8" />
   <meta content="ie=edge" http-equiv="x-ua-compatible" />
   <meta content="width=device-width,initial-scale=1.0" name="viewport" />
-  <title>WFX Bank Secure Banking Home</title>
+  <title>Whatfix Bank Secure Banking Home</title>
   <link rel="icon" type="image/ico" href="img/favicon.ico" />
   <!-- CSS here -->
   <link href="css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css">
@@ -55,101 +55,423 @@
   
   <!-- Custom Dashboard Styles -->
   <style>
+    /* Main Layout Improvements */
+    .container {
+      max-width: 1200px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    
+    /* Section Spacing */
+    .pt-80 { padding-top: 80px; }
+    .pb-40 { padding-bottom: 40px; }
+    .pt-60 { padding-top: 60px; }
+    .pb-30 { padding-bottom: 30px; }
+    .pt-70 { padding-top: 70px; }
+    .pt-40 { padding-top: 40px; }
+    .pb-90 { padding-bottom: 90px; }
+    
+    /* Welcome Section */
+    .welcome-section {
+      background-color: #24223B;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .welcome-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="none"><path d="M0,20 C150,100 350,0 500,50 C650,100 850,0 1000,20 L1000,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/></svg>') no-repeat bottom;
+      background-size: cover;
+      z-index: 1;
+    }
+    
+    .welcome-section::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(255,255,255,0.03) 0%, transparent 50%);
+      z-index: 1;
+      animation: floatElements 20s ease-in-out infinite;
+    }
+    
+    @keyframes floatElements {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(1deg); }
+    }
+    
+    .welcome-section .container {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .welcome-section h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .welcome-section p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.9);
+    }
+    
+    /* Balance Overview Card */
     .balance-overview-card {
       border: 1px solid #e9ecef;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      border-radius: 12px;
+      padding: 40px;
+      background: #fff;
+    }
+    
+    .balance-stat {
+      text-align: center;
+      padding: 20px 15px;
     }
     
     .balance-stat .balance-label {
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 10px;
+      font-size: 13px;
+      color: #6c757d;
+      margin-bottom: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.8px;
+      font-weight: 500;
     }
     
     .balance-stat .balance-value {
-      font-size: 24px;
+      font-size: 28px;
       font-weight: 700;
       margin-bottom: 0;
+      line-height: 1.2;
+    }
+    
+    /* Quick Actions */
+    .quick-actions-section {
+      background-color: #f8f9fa;
+      padding: 60px 0 40px 0;
     }
     
     .quick-action-btn {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
+      padding: 0 10px;
     }
     
     .quick-action-btn .action-link {
       display: block;
-      padding: 20px 15px;
+      padding: 25px 20px;
       background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       text-decoration: none;
       color: #333;
       transition: all 0.3s ease;
       border: 1px solid #e9ecef;
+      text-align: center;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
     
     .quick-action-btn .action-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
       color: #0050b2;
       text-decoration: none;
+      border-color: #0050b2;
     }
     
     .quick-action-btn .action-link i {
-      font-size: 20px;
+      font-size: 24px;
       color: #0050b2;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       display: block;
     }
     
     .quick-action-btn .action-link span {
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     
+    /* Account Cards */
+    .expected-payment {
+      margin: 20px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid #e9ecef;
+    }
+    
+    .expected-payment .sec-head {
+      padding: 25px 30px;
+      background: #fff;
+      border-radius: 12px;
+    }
+    
+    .expected-payment h5 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    
+    .expected-payment p {
+      font-size: 14px;
+      color: #6c757d;
+      margin-bottom: 0;
+    }
+    
+    .expected-payment h4 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #333;
+    }
+    
+    /* Activity Section */
     .activity-item {
       border: 1px solid #e9ecef;
+      border-radius: 12px;
       transition: all 0.3s ease;
       cursor: pointer;
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 15px;
     }
     
     .activity-item:hover {
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      background-color: #f8f9fa !important;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+      border-color: #0050b2;
     }
     
     .activity-icon {
-      width: 35px;
-      height: 35px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: rgba(0,80,178,0.1);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
+      font-size: 18px;
+      margin-right: 15px;
     }
     
+    .activity-item h6 {
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #333;
+    }
+    
+    .activity-item small {
+      color: #6c757d;
+      font-size: 12px;
+    }
+    
+    .activity-item h5 {
+      font-weight: 700;
+      font-size: 18px;
+    }
+    
+    /* Alert Items */
     .alert-item {
-      border-radius: 8px;
+      border-radius: 12px;
       transition: all 0.3s ease;
       cursor: pointer;
+      background: #fff;
+      margin-bottom: 15px;
+      border: 1px solid #e9ecef;
     }
     
     .alert-item:hover {
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
     }
     
-    .theme-btn-sm {
-      padding: 8px 16px;
+    .alert-item h6 {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    
+    .alert-item p {
       font-size: 14px;
-      border-radius: 5px;
+      color: #6c757d;
+      line-height: 1.5;
+    }
+    
+    /* Button Styles */
+    .theme-btn-sm {
+      padding: 10px 18px;
+      font-size: 13px;
+      border-radius: 6px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      vertical-align: middle;
+      min-height: 36px;
     }
     
     .bg_light {
       background-color: #f8f9fa;
     }
+    
+         .bg_disable {
+       background-color: #f8f9fa;
+     }
+     
+     /* KYC Modal Styles */
+     .kyc-steps {
+       position: relative;
+     }
+     
+     .kyc-steps::before {
+       content: '';
+       position: absolute;
+       top: 25px;
+       left: 12.5%;
+       right: 12.5%;
+       height: 2px;
+       background: #e9ecef;
+       z-index: 1;
+       transition: all 0.3s ease;
+     }
+     
+     .kyc-steps.step-1::before {
+       background: linear-gradient(to right, #0050b2 0%, #e9ecef 0%);
+     }
+     
+     .kyc-steps.step-2::before {
+       background: linear-gradient(to right, #0050b2 33%, #e9ecef 33%);
+     }
+     
+     .kyc-steps.step-3::before {
+       background: linear-gradient(to right, #0050b2 66%, #e9ecef 66%);
+     }
+     
+     .kyc-steps.step-4::before {
+       background: linear-gradient(to right, #0050b2 100%, #e9ecef 100%);
+     }
+     
+     .step-indicator {
+       position: relative;
+       z-index: 2;
+     }
+     
+     .step-number {
+       width: 50px;
+       height: 50px;
+       border-radius: 50%;
+       background: #e9ecef;
+       color: #6c757d;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       font-weight: 600;
+       margin: 0 auto 10px;
+       transition: all 0.3s ease;
+     }
+     
+     .step-indicator.active .step-number {
+       background: #0050b2;
+       color: white;
+     }
+     
+     .step-indicator.completed .step-number {
+       background: #28a745;
+       color: white;
+     }
+     
+     .step-label {
+       font-size: 14px;
+       font-weight: 500;
+       color: #6c757d;
+       margin: 0;
+     }
+     
+     .step-indicator.active .step-label {
+       color: #0050b2;
+       font-weight: 600;
+     }
+     
+     .document-upload-card {
+       transition: all 0.3s ease;
+       height: 100%;
+     }
+     
+     .document-upload-card:hover {
+       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+       border-color: #0050b2 !important;
+     }
+     
+     .upload-area {
+       background: #f8f9fa;
+       border: 2px dashed #dee2e6;
+       border-radius: 8px;
+       transition: all 0.3s ease;
+       cursor: pointer;
+     }
+     
+     .upload-area:hover {
+       border-color: #0050b2;
+       background: rgba(0,80,178,0.05);
+     }
+     
+     .border-dashed {
+       border-style: dashed !important;
+     }
+     
+     .compliance-notice {
+       border: 1px solid #e9ecef;
+     }
+     
+     .kyc-step {
+       min-height: 400px;
+     }
+     
+     .verification-section h6 {
+       color: #333;
+       font-weight: 600;
+       margin-bottom: 15px;
+       padding-bottom: 8px;
+       border-bottom: 2px solid #f8f9fa;
+     }
+     
+     .success-icon {
+       animation: checkmark 0.6s ease-in-out;
+     }
+     
+     @keyframes checkmark {
+       0% {
+         transform: scale(0);
+         opacity: 0;
+       }
+       50% {
+         transform: scale(1.2);
+         opacity: 1;
+       }
+       100% {
+         transform: scale(1);
+         opacity: 1;
+       }
+     }
     
     /* Navbar fixes */
     .header {
@@ -181,46 +503,55 @@
     }
     
     .modal-lg {
-      max-width: 85vw;
-      width: 85vw;
+      max-width: 800px;
+      width: 95%;
     }
     
     .modal-xl {
-      max-width: 90vw;
-      width: 90vw;
+      max-width: 1000px;
+      width: 95%;
     }
     
     .modal-dialog {
-      margin: 1.75rem auto;
+      margin: 2rem auto;
       pointer-events: none;
     }
     
     .modal-content {
       position: relative;
       pointer-events: auto;
-      border-radius: 12px;
+      border-radius: 16px;
       border: none;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-      min-height: 500px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
       background-color: #fff;
+      overflow: hidden;
     }
     
     .modal-header {
       border-bottom: 1px solid #e9ecef;
-      background-color: #f8f9fa;
-      border-radius: 12px 12px 0 0;
-      padding: 20px 25px;
+      background: linear-gradient(135deg, #0050b2 0%, #0040a0 100%);
+      padding: 25px 30px;
+      color: white;
     }
     
     .modal-header h4 {
-      color: #0050b2;
+      color: white;
       font-weight: 600;
       margin: 0;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
+    }
+    
+    .modal-header .btn-close {
+      filter: brightness(0) invert(1);
+      opacity: 0.8;
+    }
+    
+    .modal-header .btn-close:hover {
+      opacity: 1;
     }
     
     .modal-body {
-      padding: 25px;
+      padding: 30px;
       font-size: 15px;
       line-height: 1.6;
       position: relative;
@@ -231,8 +562,39 @@
     .modal-footer {
       border-top: 1px solid #e9ecef;
       background-color: #f8f9fa;
-      padding: 15px 25px;
-      border-radius: 0 0 12px 12px;
+      padding: 20px 30px;
+      border-radius: 0 0 16px 16px;
+    }
+    
+    /* Form Elements in Modals */
+    .modal .form-label {
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    
+    .modal .form-control,
+    .modal .form-select {
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    
+    .modal .form-control:focus,
+    .modal .form-select:focus {
+      border-color: #0050b2;
+      box-shadow: 0 0 0 0.2rem rgba(0, 80, 178, 0.15);
+    }
+    
+    .modal .input-group-text {
+      background-color: #f8f9fa;
+      border: 2px solid #e9ecef;
+      border-right: none;
+      color: #6c757d;
+      font-weight: 500;
     }
     
     /* Ensure all modal elements are clickable */
@@ -253,16 +615,20 @@
     /* Standardize modal button sizing */
     .modal-footer .btn,
     .modal-footer .theme-btn {
-      padding: 0;
+      padding: 12px 24px;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       min-width: 120px;
-      height: 40px;
-      border-radius: 6px;
+      height: 44px;
+      border-radius: 8px;
       margin-left: 10px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1;
+      vertical-align: middle;
     }
     
     .modal-footer .btn:first-child {
@@ -271,15 +637,17 @@
     
     .modal-body .btn,
     .modal-body .theme-btn {
-      padding: 0;
+      padding: 10px 20px;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       min-width: 100px;
-      height: 36px;
-      border-radius: 5px;
+      height: 40px;
+      border-radius: 6px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      line-height: 1;
+      vertical-align: middle;
     }
     
     /* Fix all theme buttons alignment */
@@ -288,30 +656,134 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      line-height: 1;
+      vertical-align: middle;
     }
     
     .theme-btn-sm {
-      padding: 0;
-      font-size: 14px;
-      height: 32px;
+      padding: 8px 16px;
+      font-size: 13px;
+      height: 36px;
       min-width: 80px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      line-height: 1;
+      vertical-align: middle;
+    }
+    
+    /* Section Titles */
+    .section-title h2 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    
+    .section-title h3 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 15px;
     }
     
     /* Responsive adjustments */
     @media (max-width: 768px) {
-      .balance-overview-card {
-        padding: 30px !important;
+      .container {
+        padding-left: 15px;
+        padding-right: 15px;
       }
+      
+      .balance-overview-card {
+        padding: 25px !important;
+      }
+      
+      .balance-stat .balance-value {
+        font-size: 22px;
+      }
+      
+      .welcome-section h1 {
+        font-size: 2rem;
+      }
+      
+      .welcome-section p {
+        font-size: 1rem;
+      }
+      
+      .section-title h2 {
+        font-size: 1.8rem;
+      }
+      
+      .section-title h3 {
+        font-size: 1.5rem;
+      }
+      
+      .quick-action-btn {
+        padding: 0 5px;
+        margin-bottom: 15px;
+      }
+      
+      .quick-action-btn .action-link {
+        padding: 20px 15px;
+        min-height: 100px;
+      }
+      
+      .expected-payment .sec-head {
+        padding: 20px;
+      }
+      
+      .activity-item {
+        padding: 15px;
+      }
+      
+      .modal-dialog {
+        margin: 1rem auto;
+      }
+      
+      .modal-body {
+        padding: 20px;
+      }
+      
+      .modal-footer {
+        padding: 15px 20px;
+      }
+      
+      .modal-lg,
+      .modal-xl {
+        max-width: 95%;
+        width: 95%;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .pt-80 { padding-top: 50px; }
+      .pt-60 { padding-top: 40px; }
+      .pt-70 { padding-top: 50px; }
+      .pt-40 { padding-top: 30px; }
+      .pb-90 { padding-bottom: 60px; }
       
       .balance-stat .balance-value {
         font-size: 20px;
       }
       
-      .col-lg-6 {
-        margin-bottom: 40px;
+      .quick-action-btn .action-link span {
+        font-size: 12px;
+      }
+      
+      .activity-item h5 {
+        font-size: 16px;
+      }
+      
+      .expected-payment h4 {
+        font-size: 20px;
+      }
+      
+      .welcome-section h1 {
+        font-size: 1.8rem;
+      }
+      
+      .welcome-section p {
+        font-size: 0.95rem;
       }
     }
   </style>
@@ -350,14 +822,11 @@
                 <li wfx_id="header-element-component-p-l">
                   <img alt="phone" class="img-fluid" src="img/phone-outline-white.png"
                     wfx_id="header-element-phone-contact-icon" /><a href="tel:01234567890"
-                    wfx_id="header-element-phone-contact-wrapper">+44 330 054 3073</a><br />
-                  <img alt="phone" class="img-fluid" src="img/phone-outline-white.png"
-                    wfx_id="header-element-phone-contact-icon-c" /><a href="tel:01234567890"
-                    wfx_id="header-element-phone-contact-wrapper-d">+1 445-213-5268</a>
+                    wfx_id="header-element-phone-contact-wrapper">+44 330 054 3073</a>
                 </li>
                 <li wfx_id="header-element-component-q">
-                  <i class="icon_mail_alt"></i><a href="mailto:bancainfo@email.com"
-                    wfx_id="header-element-email-contact">bancainfo@email.com</a>
+                                          <i class="icon_mail_alt"></i><a href="mailto:info@whatfixbank.com"
+                            wfx_id="header-element-email-contact">info@whatfixbank.com</a>
                 </li>
               </ul>
             </div>
@@ -494,12 +963,12 @@
   <!-- Header end-->
   <main wfx_id="page-main-content">
     <!-- Welcome Section -->
-    <section class="pt-80 pb-40 bg_white" wfx_id="welcome-section">
+    <section class="welcome-section pt-80 pb-40" wfx_id="welcome-section">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-lg-8 text-center">
-            <h1 class="mb-3 wow fadeInUp" data-wow-delay="0.1s">Welcome Back, Cleo</h1>
-            <p class="fs-5 text-muted mb-0">Here's an overview of your accounts and recent activity</p>
+          <div class="col-lg-10 text-center">
+            <h1 class="mb-4 wow fadeInUp" data-wow-delay="0.1s">Welcome Back, Cleo</h1>
+            <p class="fs-5 mb-0 wow fadeInUp" data-wow-delay="0.2s">Here's an overview of your accounts and recent activity</p>
           </div>
         </div>
       </div>
@@ -507,54 +976,54 @@
     <!-- Welcome Section End -->
 
     <!-- Quick Actions Section -->
-    <section class="pt-60 pb-30 bg_light" wfx_id="quick-actions-section">
+    <section class="quick-actions-section" wfx_id="quick-actions-section">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-lg-2 col-md-3 col-6 mb-30">
-            <div class="quick-action-btn text-center">
+          <div class="col-lg-2 col-md-4 col-6">
+            <div class="quick-action-btn">
               <a href="#transfer-modal" class="action-link" data-bs-toggle="modal">
                 <i class="icon_documents_alt"></i>
                 <span>Transfer</span>
               </a>
             </div>
           </div>
-          <div class="col-lg-2 col-md-3 col-6 mb-30">
-            <div class="quick-action-btn text-center">
+          <div class="col-lg-2 col-md-4 col-6">
+            <div class="quick-action-btn">
               <a href="#bill-pay-modal" class="action-link" data-bs-toggle="modal">
                 <i class="icon_creditcard"></i>
                 <span>Pay Bills</span>
               </a>
             </div>
           </div>
-          <div class="col-lg-2 col-md-3 col-6 mb-30">
-            <div class="quick-action-btn text-center">
+          <div class="col-lg-2 col-md-4 col-6">
+            <div class="quick-action-btn">
               <a href="#deposit-modal" class="action-link" data-bs-toggle="modal">
                 <i class="icon_mobile"></i>
                 <span>Deposit</span>
               </a>
             </div>
           </div>
-          <div class="col-lg-2 col-md-3 col-6 mb-30">
-            <div class="quick-action-btn text-center">
+          <div class="col-lg-2 col-md-4 col-6">
+            <div class="quick-action-btn">
               <a href="#statements-modal" class="action-link" data-bs-toggle="modal">
                 <i class="icon_document_alt"></i>
                 <span>Statements</span>
               </a>
             </div>
           </div>
-          <div class="col-lg-2 col-md-3 col-6 mb-30">
-            <div class="quick-action-btn text-center">
+          <div class="col-lg-2 col-md-4 col-6">
+            <div class="quick-action-btn">
               <a href="#settings-modal" class="action-link" data-bs-toggle="modal">
                 <i class="icon_profile"></i>
                 <span>Settings</span>
               </a>
             </div>
           </div>
-          <div class="col-lg-2 col-md-3 col-6 mb-30">
-            <div class="quick-action-btn text-center">
-              <a href="#help-modal" class="action-link" data-bs-toggle="modal">
-                <i class="icon_lifesaver"></i>
-                <span>Help</span>
+          <div class="col-lg-2 col-md-4 col-6">
+            <div class="quick-action-btn">
+              <a href="#kyc-update-modal" class="action-link" data-bs-toggle="modal">
+                <i class="icon_shield"></i>
+                <span>Update KYC</span>
               </a>
             </div>
           </div>
@@ -564,35 +1033,35 @@
     <!-- Quick Actions End -->
 
     <!-- Balance Overview Section -->
-    <section class="pt-70 pb-40 bg_white" wfx_id="balance-overview-section">
+    <section class="pt-70 pb-40" wfx_id="balance-overview-section">
       <div class="container">
-        <div class="section-title text-center">
-          <h2 class="mb-40 wow fadeInUp">Account Balance Overview</h2>
+        <div class="section-title text-center mb-5">
+          <h2 class="wow fadeInUp" data-wow-delay="0.1s">Account Balance Overview</h2>
         </div>
         <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="balance-overview-card bg_disable p-50 rounded text-center">
+          <div class="col-lg-10">
+            <div class="balance-overview-card wow fadeInUp" data-wow-delay="0.2s">
               <div class="row">
-                <div class="col-md-4 mb-30">
+                <div class="col-md-4 mb-4">
                   <div class="balance-stat">
                     <h6 class="balance-label">Total Balance</h6>
                     <h3 class="balance-value text-primary mb-0">$25,333.76</h3>
                   </div>
                 </div>
-                <div class="col-md-4 mb-30">
+                <div class="col-md-4 mb-4">
                   <div class="balance-stat">
                     <h6 class="balance-label">Available Credit</h6>
                     <h3 class="balance-value text-success mb-0">$4,624.12</h3>
                   </div>
                 </div>
-                <div class="col-md-4 mb-30">
+                <div class="col-md-4 mb-4">
                   <div class="balance-stat">
                     <h6 class="balance-label">Monthly Spending</h6>
                     <h3 class="balance-value text-warning mb-0">$1,245.32</h3>
                   </div>
                 </div>
               </div>
-              <div class="text-center mt-20">
+              <div class="text-center mt-4">
                 <a href="#financial-summary-modal" class="theme-btn theme-btn-primary" data-bs-toggle="modal">View Detailed Summary</a>
               </div>
             </div>
@@ -602,31 +1071,29 @@
     </section>
     <!-- Balance Overview End -->
 
-    <!-- Feature and Calculator start -->
-    <section class="feature-calculator pt-40 pb-90 bg_white" wfx_id="hero-element-component-p">
+    <!-- Accounts Section -->
+    <section class="accounts-section pt-40 pb-60" wfx_id="hero-element-component-p">
       <div class="container" wfx_id="hero-container-component">
-        <div class="section-title text-start" wfx_id="hero-element-component-q">
-          <h2 class="mb-0 wow fadeInUp">Your Accounts</h2>
+        <div class="section-title text-center mb-5" wfx_id="hero-element-component-q">
+          <h2 class="wow fadeInUp" data-wow-delay="0.1s">Your Accounts</h2>
         </div>
         <!-- Accounts Overview -->
-        <div class="calculator mt-60" wfx_id="hero-element-component-q-c">
-          <div class="expected-payment mt-50 mr-30 ml-30 mb-50" wfx_id="hero-element-component-q-d">
-            <div class="bg_disable d-flex justify-content-between flex-wrap sec-head align-items-center"
-              wfx_id="feature-element-component-r">
+        <div class="accounts-grid" wfx_id="hero-element-component-q-c">
+          <div class="expected-payment wow fadeInUp" data-wow-delay="0.2s" wfx_id="hero-element-component-q-d">
+            <div class="d-flex justify-content-between flex-wrap sec-head align-items-center" wfx_id="feature-element-component-r">
               <div wfx_id="feature-element-component-r-b">
                 <h5>Silver Checking Account</h5>
                 <p>Available balance | Account ending in 6563</p>
               </div>
               <h4 class="mb-0">$1,162.88</h4>
               <div class="text-center" wfx_id="content-element-component">
-                <a class="theme-btn theme-btn-rounded" href="#checking-details-modal" data-bs-toggle="modal" wfx_id="action-button-cta"><i class="arrow_right"></i>
-                </a>
+                <a class="theme-btn theme-btn-rounded" href="#checking-details-modal" data-bs-toggle="modal" wfx_id="action-button-cta"><i class="arrow_right"></i></a>
               </div>
             </div>
           </div>
           
-          <div class="expected-payment mt-50 mr-30 ml-30 mb-50" wfx_id="savings-account">
-            <div class="bg_disable d-flex justify-content-between flex-wrap sec-head align-items-center">
+          <div class="expected-payment wow fadeInUp" data-wow-delay="0.3s" wfx_id="savings-account">
+            <div class="d-flex justify-content-between flex-wrap sec-head align-items-center">
               <div>
                 <h5>High-Yield Savings</h5>
                 <p>4.5% APY | Account ending in 6564</p>
@@ -638,8 +1105,8 @@
             </div>
           </div>
 
-          <div class="expected-payment mt-50 mr-30 ml-30 mb-50" wfx_id="investment-account">
-            <div class="bg_disable d-flex justify-content-between flex-wrap sec-head align-items-center">
+          <div class="expected-payment wow fadeInUp" data-wow-delay="0.4s" wfx_id="investment-account">
+            <div class="d-flex justify-content-between flex-wrap sec-head align-items-center">
               <div>
                 <h5>Investment Account</h5>
                 <p>YTD Return: +12.3% | Portfolio managed</p>
@@ -651,32 +1118,30 @@
             </div>
           </div>
 
-          <div class="expected-payment mt-50 mr-30 ml-30 mb-50" wfx_id="feature-element-component-s">
-            <div class="bg_disable d-flex justify-content-between flex-wrap sec-head align-items-center"
-              wfx_id="feature-element-component-t">
+          <div class="expected-payment wow fadeInUp" data-wow-delay="0.5s" wfx_id="feature-element-component-s">
+            <div class="d-flex justify-content-between flex-wrap sec-head align-items-center" wfx_id="feature-element-component-t">
               <div wfx_id="feature-element-component-t-e">
                 <h5>WFX Credit Card</h5>
                 <p>Current balance | VISA ending in 1234</p>
               </div>
               <h4 class="mb-0">$375.88</h4>
               <div class="text-center" wfx_id="feature-element-component-t-f">
-                <a class="theme-btn theme-btn-rounded" href="#credit-card-details-modal" data-bs-toggle="modal" wfx_id="feature-element-component-u"><i
-                    class="arrow_right"></i> </a>
+                <a class="theme-btn theme-btn-rounded" href="#credit-card-details-modal" data-bs-toggle="modal" wfx_id="feature-element-component-u"><i class="arrow_right"></i></a>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Recent Activity & Insights -->
-        <div class="row mt-90">
-          <div class="col-lg-6">
-            <div class="section-title text-start mb-40">
-              <h3 class="mb-0">Recent Activity</h3>
+        <div class="row mt-5">
+          <div class="col-lg-6 mb-5">
+            <div class="section-title text-start mb-4">
+              <h3 class="wow fadeInUp" data-wow-delay="0.1s">Recent Activity</h3>
             </div>
             <div class="activity-list">
-              <div class="activity-item d-flex justify-content-between align-items-center p-4 mb-3 bg_disable rounded" onclick="showTransactionDetails('txn-001')">
+              <div class="activity-item d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.2s" onclick="showTransactionDetails('txn-001')">
                 <div class="d-flex align-items-center">
-                  <div class="activity-icon me-3 text-success">
+                  <div class="activity-icon text-success">
                     <i class="icon_creditcard"></i>
                   </div>
                   <div>
@@ -687,9 +1152,9 @@
                 <h5 class="mb-0 text-success">+$2,500.00</h5>
               </div>
               
-              <div class="activity-item d-flex justify-content-between align-items-center p-4 mb-3 bg_disable rounded" onclick="showTransactionDetails('txn-002')">
+              <div class="activity-item d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.3s" onclick="showTransactionDetails('txn-002')">
                 <div class="d-flex align-items-center">
-                  <div class="activity-icon me-3 text-primary">
+                  <div class="activity-icon text-primary">
                     <i class="icon_cart"></i>
                   </div>
                   <div>
@@ -700,9 +1165,9 @@
                 <h5 class="mb-0 text-danger">-$89.99</h5>
               </div>
 
-              <div class="activity-item d-flex justify-content-between align-items-center p-4 mb-3 bg_disable rounded" onclick="showTransactionDetails('txn-003')">
+              <div class="activity-item d-flex justify-content-between align-items-center wow fadeInUp" data-wow-delay="0.4s" onclick="showTransactionDetails('txn-003')">
                 <div class="d-flex align-items-center">
-                  <div class="activity-icon me-3 text-warning">
+                  <div class="activity-icon text-warning">
                     <i class="icon_documents_alt"></i>
                   </div>
                   <div>
@@ -713,58 +1178,66 @@
                 <h5 class="mb-0 text-warning">-$500.00</h5>
               </div>
             </div>
-            <div class="text-center mt-30">
+            <div class="text-center mt-4">
               <a href="#all-transactions-modal" class="theme-btn theme-btn-primary" data-bs-toggle="modal">View All Transactions</a>
             </div>
           </div>
           
-          <div class="col-lg-6">
-            <div class="section-title text-start mb-40">
-              <h3 class="mb-0">Alerts & Reminders</h3>
+          <div class="col-lg-6 mb-5">
+            <div class="section-title text-start mb-4">
+              <h3 class="wow fadeInUp" data-wow-delay="0.1s">Alerts & Reminders</h3>
             </div>
             <div class="alerts-container">
-              <div class="alert-item p-4 mb-3 border-start border-4 border-warning bg_disable">
+              <div class="alert-item p-4 border-start border-4 border-warning wow fadeInUp" data-wow-delay="0.2s">
                 <div class="d-flex justify-content-between align-items-start">
                   <div>
                     <h6 class="mb-2">Credit Card Payment Due</h6>
-                    <p class="mb-2 text-muted">Your payment of $375.88 is due on January 15, 2025</p>
+                    <p class="mb-3 text-muted">Your payment of $375.88 is due on January 15, 2025</p>
                     <a href="#credit-payment-modal" class="theme-btn theme-btn-sm" data-bs-toggle="modal">Pay Now</a>
                   </div>
-                  <i class="icon_bell text-warning"></i>
+                  <i class="icon_bell text-warning fs-4"></i>
                 </div>
               </div>
               
-              <div class="alert-item p-4 mb-3 border-start border-4 border-success bg_disable" onclick="showSavingsGoalDetails()">
+              <div class="alert-item p-4 border-start border-4 border-success wow fadeInUp" data-wow-delay="0.3s" onclick="showSavingsGoalDetails()">
                 <div class="d-flex justify-content-between align-items-start">
-                  <div>
+                  <div style="flex: 1;">
                     <h6 class="mb-2">Savings Goal Progress</h6>
-                    <p class="mb-2 text-muted">You're 87% toward your $10,000 emergency fund goal!</p>
-                    <div class="progress" style="height: 6px;">
+                    <p class="mb-3 text-muted">You're 87% toward your $10,000 emergency fund goal!</p>
+                    <div class="progress" style="height: 8px;">
                       <div class="progress-bar bg-success" style="width: 87%"></div>
                     </div>
                   </div>
-                  <i class="icon_target text-success"></i>
+                  <i class="icon_target text-success fs-4 ms-3"></i>
                 </div>
               </div>
 
-              <div class="alert-item p-4 mb-3 border-start border-4 border-info bg_disable" onclick="showInvestmentDetails()">
+              <div class="alert-item p-4 border-start border-4 border-info wow fadeInUp" data-wow-delay="0.4s" onclick="showInvestmentDetails()">
                 <div class="d-flex justify-content-between align-items-start">
                   <div>
                     <h6 class="mb-2">Investment Performance</h6>
                     <p class="mb-0 text-muted">Your portfolio is up 12.3% this year, outperforming the market.</p>
                   </div>
-                  <i class="icon_chart text-info"></i>
+                  <i class="icon_chart text-info fs-4"></i>
+                </div>
+              </div>
+
+              <div class="alert-item p-4 border-start border-4 border-primary wow fadeInUp" data-wow-delay="0.5s">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <h6 class="mb-2">KYC Verification Status</h6>
+                    <p class="mb-3 text-muted">Your KYC documents expire in 45 days. Update now to ensure uninterrupted banking services.</p>
+                    <a href="#kyc-update-modal" class="theme-btn theme-btn-sm" data-bs-toggle="modal">Update KYC</a>
+                  </div>
+                  <i class="icon_shield text-primary fs-4"></i>
                 </div>
               </div>
             </div>
-            <!-- <div class="text-center mt-30">
-              <a href="#all-alerts-modal" class="theme-btn theme-btn-primary" data-bs-toggle="modal">Manage All Alerts</a>
-            </div> -->
           </div>
         </div>
       </div>
     </section>
-    <!-- Feature and Calculator end -->
+    <!-- Accounts Section End -->
     <!-- Advisor start -->
     <section class="advisor-area pt-130 pb-140 overflow-hidden" id="MouseMoveAnimation"
       wfx_id="feature-element-component-n">
@@ -796,8 +1269,8 @@
               </div>
               <div class="col-md-6" wfx_id="faq-element-component-s">
                 <a class="theme-btn theme-btn-primary_alt theme-btn-rounded d-flex align-items-center justify-content-center"
-                  href="mailto:bancainfo@email.com" wfx_id="header-login-button-s">
-                  <i class="icon_mail_alt"></i> info@WFXBank.com</a>
+                                      href="mailto:info@whatfixbank.com" wfx_id="header-login-button-s">
+                  <i class="icon_mail_alt"></i> info@whatfixbank.com</a>
               </div>
             </div>
           </div>
@@ -882,7 +1355,7 @@
                   <div class="faq-header" id="headingFive" wfx_id="header-element-component-i-">
                     <h6 aria-controls="collapseFive" aria-expanded="true" class="mb-0 collapsed"
                       data-bs-target="#collapseFive" data-bs-toggle="collapse">
-                      What does it cost to use WFX Bank?<i class="icon_plus"></i><i class="icon_close"></i>
+                                              What does it cost to use Whatfix Bank?<i class="icon_plus"></i><i class="icon_close"></i>
                     </h6>
                   </div>
                   <div aria-labelledby="headingFive" class="collapse" data-bs-parent="#accordionExample"
@@ -973,73 +1446,58 @@
     <!-- Advisor end -->
   </main>
   <!-- footer -->
-  <footer class="footer footer-3" wfx_id="feature-element-component-z-">
-    <div class="footer-top pt-lg-130 pb-lg-115 pt-105 pb-105" wfx_id="feature-element-component-z-">
-      <div class="container" wfx_id="feature-element-component-z-">
-        <div class="row gx-0" wfx_id="feature-element-component-z-">
-          <div class="col-lg-4 col-sm-6 text-center text-sm-start ms-0" wfx_id="feature-column-service-a">
-            <div class="footer-widget wow fadeInLeft mb-30" wfx_id="feature-element-component-a-">
-              <div class="footer-text mb-20" wfx_id="feature-element-component-a-">
-                <p>WFX Bank IS NOT A REAL COMPANY. This site is used for Qualtrics demo purposes only.</p>
+  <footer class="footer footer-3" wfx_id="feature-element-component-n-">
+    <div class="footer-top pt-200 pb-lg-115 pb-120" wfx_id="feature-element-component-n-">
+      <div class="container" wfx_id="feature-element-component-n-">
+        <div class="row gx-0 pt-45" wfx_id="feature-element-component-n-">
+          <div class="col-lg-4 col-sm-6 text-center text-sm-start ms-0" wfx_id="feature-column-service-o">
+            <div class="footer-widget wow fadeInLeft mb-30" wfx_id="feature-element-component-o-">
+              <div class="footer-text mb-20" wfx_id="feature-element-component-o-">
+                <p>Whatfix Bank is a demo platform designed for training and demonstration purposes only. Experience our digital banking solutions in a safe, simulated environment.</p>
               </div>
             </div>
           </div>
-          <div class="col-lg-2 col-sm-6 text-center text-sm-start ms-lg-5" wfx_id="feature-element-component-b">
-            <div class="footer-widget mb-30 wow fadeInUp" data-wow-delay="0.1s" wfx_id="feature-element-component-b-">
-              <div class="f-widget-title" wfx_id="feature-element-component-b-">
-                <h5>WFX Bank at a Glance</h5>
+          <div class="col-lg-2 col-sm-6 text-center text-sm-start ms-lg-5" wfx_id="feature-element-component-p-">
+            <div class="footer-widget mb-30 wow fadeInUp" data-wow-delay="0.1s" wfx_id="feature-element-component-p-">
+              <div class="f-widget-title" wfx_id="feature-element-component-p-">
+                <h5>About Whatfix Bank</h5>
               </div>
-              <div class="footer-link" wfx_id="corporate-element-component-c">
-                <ul wfx_id="corporate-element-component-c-b">
-                  <li wfx_id="corporate-element-component-c-c"><a href="#" wfx_id="corporate-element-component-c-d"> Our
-                      core Businesses
-                    </a></li>
-                  <li wfx_id="corporate-element-component-d"><a href="#" wfx_id="corporate-element-component-d-f"> Our
-                      'company purpose'</a></li>
-                  <li wfx_id="corporate-element-component-d-g"><a href="#" wfx_id="corporate-element-component-d-h">
-                      Jobs &amp; Careers</a></li>
-                  <li wfx_id="corporate-element-component-d-i"><a href="#" wfx_id="corporate-element-component-e"> Our
-                      Responsibility</a></li>
+              <div class="footer-link" wfx_id="corporate-element-home-q">
+                <ul wfx_id="corporate-element-home-q-d">
+                  <li wfx_id="corporate-element-home-q-e"><a href="index.html" wfx_id="corporate-element-home-q-f">Our Services</a></li>
+                  <li wfx_id="corporate-element-home-q-g"><a href="contact.html" wfx_id="corporate-element-home-q-h">Company Purpose</a></li>
+                  <li wfx_id="corporate-element-home-r"><a href="job-application.html" wfx_id="corporate-element-home-r-j">Careers</a></li>
+                  <li wfx_id="corporate-element-home-r-k"><a href="contact.html" wfx_id="corporate-element-home-r-l">Corporate Responsibility</a></li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="col-lg-2 col-sm-6 text-center text-sm-start ms-lg-5" wfx_id="corporate-element-component-e-k">
-            <div class="footer-widget mb-30 wow fadeInUp" data-wow-delay="0.3s"
-              wfx_id="footer-links-section-component-e">
-              <div class="f-widget-title" wfx_id="footer-element-component-f">
-                <h5>Publications</h5>
+          <div class="col-lg-2 col-sm-6 text-center text-sm-start ms-lg-5" wfx_id="corporate-element-home-s">
+            <div class="footer-widget mb-30 wow fadeInUp" data-wow-delay="0.3s" wfx_id="footer-links-section-home-s">
+              <div class="f-widget-title" wfx_id="footer-element-home-s">
+                <h5>Resources</h5>
               </div>
-              <div class="footer-link" wfx_id="footer-element-component-f-b">
-                <ul wfx_id="footer-element-component-f-c">
-                  <li wfx_id="footer-element-component-f-d"><a href="#" wfx_id="footer-element-component-f-e">
-                      Compliance Publications</a></li>
-                  <li wfx_id="footer-element-component-g"><a href="#" wfx_id="footer-element-component-g-g"> Annual
-                      Reports</a></li>
-                  <li wfx_id="footer-element-component-g-h"><a href="#" wfx_id="footer-element-component-g-i"> CSR
-                      Reports</a></li>
-                  <li wfx_id="footer-element-component-g-j"><a href="#" wfx_id="footer-element-component-g-k"> Financial
-                      documentation</a></li>
+              <div class="footer-link" wfx_id="footer-element-home-t">
+                <ul wfx_id="footer-element-home-t-c">
+                  <li wfx_id="footer-element-home-t-d"><a href="contact.html" wfx_id="footer-element-home-t-e">Help Center</a></li>
+                  <li wfx_id="footer-element-home-t-f"><a href="index.html#security" wfx_id="footer-element-home-t-g">Security Information</a></li>
+                  <li wfx_id="footer-element-home-t-h"><a href="index.html#faq" wfx_id="footer-element-home-u">FAQ</a></li>
+                  <li wfx_id="footer-element-home-u-j"><a href="contact.html" wfx_id="footer-element-home-u-k">Contact Support</a></li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="col-lg-2 col-sm-6 text-center text-sm-start me-0 ms-lg-5" wfx_id="footer-element-component-h">
-            <div class="footer-widget mb-30 wow fadeInUp" data-wow-delay="0.5s"
-              wfx_id="footer-links-section-component-h">
-              <div class="f-widget-title" wfx_id="footer-element-component-i">
-                <h5>Direct Access</h5>
+          <div class="col-lg-2 col-sm-6 text-center text-sm-start me-0 ms-lg-5" wfx_id="footer-element-home-u-l">
+            <div class="footer-widget mb-30 wow fadeInUp" data-wow-delay="0.5s" wfx_id="footer-links-section-home-v">
+              <div class="f-widget-title" wfx_id="footer-element-home-v">
+                <h5>Quick Links</h5>
               </div>
-              <div class="footer-link" wfx_id="footer-element-component-i-n">
-                <ul wfx_id="footer-element-component-i-o">
-                  <li wfx_id="footer-element-component-i-p"><a href="#" wfx_id="footer-element-component-i-q">Our
-                      news</a></li>
-                  <li wfx_id="footer-element-component-i-r"><a href="#" wfx_id="footer-element-component-j">Our press
-                      releases</a></li>
-                  <li wfx_id="footer-element-component-j-t"><a href="#" wfx_id="footer-element-component-j-u">Our job
-                      offers</a></li>
-                  <li wfx_id="footer-element-component-j-v"><a href="#" wfx_id="footer-element-component-j-w">Our
-                      websites</a></li>
+              <div class="footer-link" wfx_id="footer-element-home-v-n">
+                <ul wfx_id="footer-element-home-v-o">
+                  <li wfx_id="footer-element-home-v-p"><a href="login.html" wfx_id="footer-element-home-w">Login</a></li>
+                  <li wfx_id="footer-element-home-w-r"><a href="loan-apply.html" wfx_id="footer-element-home-w-s">Apply for Loan</a></li>
+                  <li wfx_id="footer-element-home-w-t"><a href="onlinebanking-home.html" wfx_id="footer-element-home-w-u">Open Account</a></li>
+                  <li wfx_id="footer-element-home-w-v"><a href="contact.html" wfx_id="footer-element-home-x">Find Branch</a></li>
                 </ul>
               </div>
             </div>
@@ -1048,28 +1506,13 @@
       </div>
     </div>
     <!-- copyright area -->
-    <div class="copyright pt-25 pb-25" wfx_id="footer-element-component-k">
-      <div class="container" wfx_id="footer-element-component-k-y">
-        <div class="row align-items-center" wfx_id="footer-element-component-k-z">
-          <div class="col-lg-3 text-center text-lg-start" wfx_id="footer-element-component-l">
-            <a class="p-0 m-0" href="index.html" wfx_id="footer-element-component-l-z"><img alt="logo"
-                src="img/logo/Logo-2.png" wfx_id="feature-element-component-l" /></a>
-          </div>
-          <div class="col-lg-5 text-center my-3 my-sm-0" wfx_id="feature-element-component-l-">
-            <div class="copyright-text" wfx_id="feature-element-component-m-">
-              <p>Copyright© WFX Bank 2025.<br class="d-sm-none" /> <a class="ms-2" href="#"
-                  wfx_id="feature-element-component-m-">Privacy</a> |
-                <a class="ms-0" href="#" wfx_id="feature-element-component-m-">Term of
-                  Use</a>
+    <div class="copyright pt-25 pb-25" wfx_id="footer-element-home-x-x">
+      <div class="container" wfx_id="footer-element-home-x-y">
+        <div class="row justify-content-center" wfx_id="footer-element-home-x-z">
+          <div class="col-lg-5 text-center my-3 my-sm-0" wfx_id="feature-element-component-z">
+            <div class="copyright-text" wfx_id="feature-element-component-z-">
+              <p>Made with ❤️ by <a href="https://whatfix.com" target="_blank">Whatfix BFSI Team</a> | Copyright © Whatfix 2025<br class="d-sm-none" />
               </p>
-            </div>
-          </div>
-          <div class="col-lg-4 text-center text-lg-end" wfx_id="feature-column-service-n">
-            <div class="social-button" wfx_id="feature-element-component-n-">
-              <a href="#" wfx_id="feature-element-component-n-"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" wfx_id="feature-element-component-o-"><i class="fab fa-twitter"></i></a>
-              <a href="#" wfx_id="feature-element-component-o-"><i class="fab fa-pinterest-p"></i></a>
-              <a href="#" wfx_id="feature-element-component-o-"><i class="fab fa-linkedin-in"></i></a>
             </div>
           </div>
         </div>
@@ -1132,7 +1575,7 @@
               <input type="text" class="form-control" id="transfer-memo" placeholder="Enter a description for this transfer">
             </div>
             <div class="alert alert-info">
-              <i class="icon_info_alt"></i> <strong>Note:</strong> Transfers between your WFX Bank accounts are instant and free.
+                                    <i class="icon_info_alt"></i> <strong>Note:</strong> Transfers between your Whatfix Bank accounts are instant and free.
             </div>
           </form>
         </div>
@@ -1357,6 +1800,294 @@
           <button type="button" class="theme-btn theme-btn-secondary" onclick="downloadFinancialReport()">Download Report</button>
           <button type="button" class="theme-btn theme-btn-primary" onclick="scheduleFinancialReview()">Schedule Review</button>
           <button type="button" class="theme-btn theme-btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KYC Update Modal -->
+  <div class="modal fade" id="kyc-update-modal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Update KYC Verification</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <!-- KYC Status Banner -->
+          <div class="alert alert-info mb-4">
+            <div class="d-flex align-items-center">
+              <i class="icon_shield me-3 fs-4"></i>
+              <div>
+                <h6 class="mb-1">Current KYC Status: <span class="badge bg-warning">Expiring Soon</span></h6>
+                <p class="mb-0">Last updated: March 15, 2024 | Expires: February 28, 2025</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Demo Notice -->
+          <div class="alert alert-secondary mb-4">
+            <div class="d-flex align-items-center">
+              <i class="icon_info_alt me-3 fs-5"></i>
+              <div>
+                <h6 class="mb-1">Demo Mode</h6>
+                <p class="mb-0">You can navigate through all steps without validation requirements. Simply click "Next Step" to proceed through the complete KYC process and explore all features.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- KYC Update Process -->
+          <div class="kyc-process-container">
+            <!-- Progress Steps -->
+            <div class="kyc-steps mb-5">
+              <div class="row text-center">
+                <div class="col-md-3">
+                  <div class="step-indicator active">
+                    <div class="step-number">1</div>
+                    <p class="step-label">Personal Info</p>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="step-indicator">
+                    <div class="step-number">2</div>
+                    <p class="step-label">Documents</p>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="step-indicator">
+                    <div class="step-number">3</div>
+                    <p class="step-label">Verification</p>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="step-indicator">
+                    <div class="step-number">4</div>
+                    <p class="step-label">Complete</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 1: Personal Information -->
+            <div id="kyc-step-1" class="kyc-step active">
+              <h5 class="mb-4">Step 1: Verify Personal Information</h5>
+              <form id="kyc-personal-form">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Full Name *</label>
+                    <input type="text" class="form-control" value="Cleo Johnson" readonly>
+                    <small class="text-muted">Name cannot be changed here. Contact support if incorrect.</small>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Date of Birth *</label>
+                    <input type="date" class="form-control" value="1990-05-15" readonly>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Phone Number *</label>
+                    <input type="tel" class="form-control" value="+1 (555) 123-4567" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Email Address *</label>
+                    <input type="email" class="form-control" value="cleo.johnson@email.com" required>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-bold">Current Address *</label>
+                  <textarea class="form-control" rows="3" required>123 Banking Street, New York, NY 10001, USA</textarea>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Occupation *</label>
+                    <input type="text" class="form-control" value="Software Engineer" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Annual Income *</label>
+                    <select class="form-select" required>
+                      <option value="">Select Income Range</option>
+                      <option value="25000-35000">$25,000 - $35,000</option>
+                      <option value="35000-50000" selected>$35,000 - $50,000</option>
+                      <option value="50000-75000">$50,000 - $75,000</option>
+                      <option value="75000-100000">$75,000 - $100,000</option>
+                      <option value="100000+">$100,000+</option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Step 2: Document Upload -->
+            <div id="kyc-step-2" class="kyc-step" style="display: none;">
+              <h5 class="mb-4">Step 2: Upload Required Documents</h5>
+              <div class="document-upload-section">
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="document-upload-card p-4 border rounded">
+                      <h6 class="mb-3"><i class="icon_id-2 text-primary me-2"></i>Photo ID</h6>
+                      <p class="text-muted mb-3">Upload passport, driver's license, or state ID</p>
+                      <div class="upload-area border-dashed p-4 text-center">
+                        <i class="icon_upload fs-2 text-muted mb-2"></i>
+                        <p class="mb-2">Drag & drop or <span class="text-primary">browse</span> to upload</p>
+                        <small class="text-muted">Max file size: 10MB | JPG, PNG, PDF</small>
+                        <input type="file" class="form-control mt-2" accept=".jpg,.jpeg,.png,.pdf">
+                      </div>
+                      <div class="upload-status mt-2" style="display: none;">
+                        <div class="alert alert-success">
+                          <i class="icon_check me-2"></i>Document uploaded successfully
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="document-upload-card p-4 border rounded">
+                      <h6 class="mb-3"><i class="icon_house text-primary me-2"></i>Proof of Address</h6>
+                      <p class="text-muted mb-3">Upload utility bill, bank statement (within 3 months)</p>
+                      <div class="upload-area border-dashed p-4 text-center">
+                        <i class="icon_upload fs-2 text-muted mb-2"></i>
+                        <p class="mb-2">Drag & drop or <span class="text-primary">browse</span> to upload</p>
+                        <small class="text-muted">Max file size: 10MB | JPG, PNG, PDF</small>
+                        <input type="file" class="form-control mt-2" accept=".jpg,.jpeg,.png,.pdf">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="document-upload-card p-4 border rounded">
+                      <h6 class="mb-3"><i class="icon_documents text-primary me-2"></i>Proof of Income</h6>
+                      <p class="text-muted mb-3">Upload recent payslips or employment letter</p>
+                      <div class="upload-area border-dashed p-4 text-center">
+                        <i class="icon_upload fs-2 text-muted mb-2"></i>
+                        <p class="mb-2">Drag & drop or <span class="text-primary">browse</span> to upload</p>
+                        <small class="text-muted">Max file size: 10MB | JPG, PNG, PDF</small>
+                        <input type="file" class="form-control mt-2" accept=".jpg,.jpeg,.png,.pdf">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4">
+                    <div class="document-upload-card p-4 border rounded">
+                      <h6 class="mb-3"><i class="icon_camera text-primary me-2"></i>Selfie Verification</h6>
+                      <p class="text-muted mb-3">Take a selfie holding your ID document</p>
+                      <div class="upload-area border-dashed p-4 text-center">
+                        <button type="button" class="btn btn-primary mb-2" onclick="startSelfieCapture()">
+                          <i class="icon_camera me-2"></i>Take Selfie
+                        </button>
+                        <p class="mb-2">or <span class="text-primary">upload photo</span></p>
+                        <input type="file" class="form-control mt-2" accept=".jpg,.jpeg,.png" capture="user">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3: Verification -->
+            <div id="kyc-step-3" class="kyc-step" style="display: none;">
+              <h5 class="mb-4">Step 3: Additional Verification</h5>
+              <div class="verification-section">
+                <div class="mb-4">
+                  <h6>Security Questions</h6>
+                  <div class="mb-3">
+                    <label class="form-label">What was the name of your first pet?</label>
+                    <input type="text" class="form-control" placeholder="Enter your answer">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">What is your mother's maiden name?</label>
+                    <input type="text" class="form-control" placeholder="Enter your answer">
+                  </div>
+                </div>
+                
+                <div class="mb-4">
+                  <h6>SMS Verification</h6>
+                  <p class="text-muted">We'll send a verification code to your registered mobile number</p>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <button type="button" class="btn btn-outline-primary" onclick="sendSMSCode()">Send SMS Code</button>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" class="form-control" placeholder="Enter 6-digit code" maxlength="6">
+                    </div>
+                    <div class="col-md-4">
+                      <button type="button" class="btn btn-success" onclick="verifySMSCode()">Verify</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <h6>Risk Assessment Questions</h6>
+                  <div class="mb-3">
+                    <label class="form-label">Source of funds for this account</label>
+                    <select class="form-select" required>
+                      <option value="">Select source</option>
+                      <option value="salary">Employment Salary</option>
+                      <option value="business">Business Income</option>
+                      <option value="investment">Investment Returns</option>
+                      <option value="inheritance">Inheritance</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Expected monthly transaction volume</label>
+                    <select class="form-select" required>
+                      <option value="">Select range</option>
+                      <option value="low">$0 - $5,000</option>
+                      <option value="medium">$5,000 - $25,000</option>
+                      <option value="high">$25,000 - $100,000</option>
+                      <option value="very-high">$100,000+</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4: Complete -->
+            <div id="kyc-step-4" class="kyc-step" style="display: none;">
+              <div class="text-center">
+                <h5 class="mb-4">KYC Update Submitted Successfully!</h5>
+                <div class="success-icon mb-4">
+                  <i class="icon_check_alt2 text-success" style="font-size: 4rem;"></i>
+                </div>
+                <p class="mb-4">Your KYC documents have been submitted for review. We'll notify you within 2-3 business days.</p>
+                <div class="alert alert-info">
+                  <h6>What happens next?</h6>
+                  <ul class="text-start mb-0">
+                    <li>Our compliance team will review your documents</li>
+                    <li>You'll receive email/SMS updates on the verification status</li>
+                    <li>Your account remains fully functional during the review process</li>
+                    <li>Contact support if you need to update any information</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Compliance & Security Notice -->
+          <div class="compliance-notice mt-4 p-3 bg-light rounded">
+            <h6><i class="icon_shield text-success me-2"></i>Security & Compliance</h6>
+            <div class="row">
+              <div class="col-md-6">
+                <small class="text-muted">
+                  • All documents are encrypted and stored securely<br>
+                  • Data is processed in compliance with federal privacy regulations<br>
+                  • Documents are automatically deleted after verification
+                </small>
+              </div>
+              <div class="col-md-6">
+                <small class="text-muted">
+                  • 256-bit SSL encryption protects your data<br>
+                  • Access logged and monitored for security<br>
+                  • Regular compliance audits ensure data protection
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="theme-btn theme-btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="theme-btn theme-btn-secondary" id="kyc-prev-btn" onclick="previousKYCStep()" style="display: none;">Previous</button>
+          <button type="button" class="theme-btn theme-btn-primary" id="kyc-next-btn" onclick="nextKYCStep()">Next Step</button>
+          <button type="button" class="theme-btn theme-btn-success" id="kyc-submit-btn" onclick="submitKYC()" style="display: none;">Submit KYC</button>
         </div>
       </div>
     </div>
@@ -1673,6 +2404,229 @@
       new bootstrap.Modal(document.getElementById('generic-modal')).show();
     }
 
+    // KYC Process Functions
+    let currentKYCStep = 1;
+    const totalKYCSteps = 4;
+
+    function nextKYCStep() {
+      console.log(`Attempting to go from step ${currentKYCStep} to ${currentKYCStep + 1}`);
+      
+      if (currentKYCStep < totalKYCSteps) {
+        try {
+          // Hide current step
+          const currentStepElement = document.getElementById(`kyc-step-${currentKYCStep}`);
+          if (currentStepElement) {
+            currentStepElement.style.display = 'none';
+          }
+          
+          // Update current step indicator
+          const currentIndicator = document.querySelector(`.step-indicator:nth-child(${currentKYCStep})`);
+          if (currentIndicator) {
+            currentIndicator.classList.remove('active');
+            currentIndicator.classList.add('completed');
+          }
+          
+          // Move to next step
+          currentKYCStep++;
+          console.log(`Now on step ${currentKYCStep}`);
+          
+          // Show next step
+          const nextStepElement = document.getElementById(`kyc-step-${currentKYCStep}`);
+          if (nextStepElement) {
+            nextStepElement.style.display = 'block';
+          }
+          
+          // Update next step indicator
+          const nextIndicator = document.querySelector(`.step-indicator:nth-child(${currentKYCStep})`);
+          if (nextIndicator) {
+            nextIndicator.classList.add('active');
+          }
+          
+          // Update buttons
+          updateKYCButtons();
+          
+          // Update progress line
+          updateProgressLine();
+          
+        } catch (error) {
+          console.error('Error in nextKYCStep:', error);
+        }
+      } else {
+        console.log('Already at final step');
+      }
+    }
+
+    function previousKYCStep() {
+      if (currentKYCStep > 1) {
+        // Hide current step
+        document.getElementById(`kyc-step-${currentKYCStep}`).style.display = 'none';
+        document.querySelector(`.step-indicator:nth-child(${currentKYCStep})`).classList.remove('active');
+        
+        // Show previous step
+        currentKYCStep--;
+        document.getElementById(`kyc-step-${currentKYCStep}`).style.display = 'block';
+        document.querySelector(`.step-indicator:nth-child(${currentKYCStep})`).classList.add('active');
+        document.querySelector(`.step-indicator:nth-child(${currentKYCStep})`).classList.remove('completed');
+        
+        // Update buttons
+        updateKYCButtons();
+        
+        // Update progress line
+        updateProgressLine();
+      }
+    }
+
+    function updateKYCButtons() {
+      const prevBtn = document.getElementById('kyc-prev-btn');
+      const nextBtn = document.getElementById('kyc-next-btn');
+      const submitBtn = document.getElementById('kyc-submit-btn');
+      
+      // Show/hide previous button
+      prevBtn.style.display = currentKYCStep > 1 ? 'inline-block' : 'none';
+      
+      // Show/hide next and submit buttons
+      if (currentKYCStep === totalKYCSteps) {
+        nextBtn.style.display = 'none';
+        submitBtn.style.display = 'none'; // Final step doesn't need submit
+      } else if (currentKYCStep === totalKYCSteps - 1) {
+        nextBtn.style.display = 'none';
+        submitBtn.style.display = 'inline-block';
+      } else {
+        nextBtn.style.display = 'inline-block';
+        submitBtn.style.display = 'none';
+      }
+    }
+
+
+
+    function updateProgressLine() {
+      console.log(`Current KYC Step: ${currentKYCStep} of ${totalKYCSteps}`);
+      
+      // Update progress line based on current step
+      const stepsContainer = document.querySelector('.kyc-steps');
+      if (stepsContainer) {
+        // Remove all step classes
+        stepsContainer.classList.remove('step-1', 'step-2', 'step-3', 'step-4');
+        // Add current step class
+        stepsContainer.classList.add(`step-${currentKYCStep}`);
+      }
+      
+      // Update step indicators
+      for (let i = 1; i <= totalKYCSteps; i++) {
+        const indicator = document.querySelector(`.step-indicator:nth-child(${i})`);
+        if (indicator) {
+          indicator.classList.remove('active', 'completed');
+          
+          if (i < currentKYCStep) {
+            indicator.classList.add('completed');
+          } else if (i === currentKYCStep) {
+            indicator.classList.add('active');
+          }
+        }
+      }
+    }
+
+    function validateKYCStep(step) {
+      // Demo mode - no validation barriers, always allow progression
+      return true;
+    }
+
+    function submitKYC() {
+      // Simulate KYC submission without validation
+      const submitBtn = document.getElementById('kyc-submit-btn');
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Submitting...';
+      submitBtn.disabled = true;
+      
+      setTimeout(() => {
+        // Hide current step
+        document.getElementById(`kyc-step-${currentKYCStep}`).style.display = 'none';
+        document.querySelector(`.step-indicator:nth-child(${currentKYCStep})`).classList.remove('active');
+        document.querySelector(`.step-indicator:nth-child(${currentKYCStep})`).classList.add('completed');
+        
+        // Show final step
+        currentKYCStep = totalKYCSteps;
+        document.getElementById(`kyc-step-${currentKYCStep}`).style.display = 'block';
+        document.querySelector(`.step-indicator:nth-child(${currentKYCStep})`).classList.add('active');
+        
+        // Update buttons for final step
+        updateKYCButtons();
+        
+        // Reset button
+        submitBtn.innerHTML = 'Submit KYC';
+        submitBtn.disabled = false;
+        
+        // Update progress line to complete
+        updateProgressLine();
+      }, 2000);
+    }
+
+    // Initialize KYC modal
+    function initializeKYCModal() {
+      console.log('Initializing KYC Modal');
+      currentKYCStep = 1;
+      
+      // Reset all steps
+      for (let i = 1; i <= totalKYCSteps; i++) {
+        const stepElement = document.getElementById(`kyc-step-${i}`);
+        const stepIndicator = document.querySelector(`.step-indicator:nth-child(${i})`);
+        
+        if (stepElement) {
+          stepElement.style.display = i === 1 ? 'block' : 'none';
+        }
+        
+        if (stepIndicator) {
+          stepIndicator.classList.remove('active', 'completed');
+          if (i === 1) stepIndicator.classList.add('active');
+        }
+      }
+      
+      // Reset buttons
+      updateKYCButtons();
+      
+      // Initialize progress line
+      updateProgressLine();
+      
+      console.log('KYC Modal initialized - starting on step 1');
+    }
+
+    // SMS and Selfie functions
+    function sendSMSCode() {
+      const button = event.target;
+      button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Sending...';
+      button.disabled = true;
+      
+      setTimeout(() => {
+        alert('Verification code sent to your mobile number ending in ***456');
+        button.innerHTML = 'Code Sent';
+        button.classList.remove('btn-outline-primary');
+        button.classList.add('btn-success');
+      }, 2000);
+    }
+
+    function verifySMSCode() {
+      const codeInput = document.querySelector('#kyc-step-3 input[placeholder="Enter 6-digit code"]');
+      const code = codeInput.value;
+      
+      if (code.length === 6) {
+        const button = event.target;
+        button.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Verifying...';
+        button.disabled = true;
+        
+        setTimeout(() => {
+          button.innerHTML = 'Verified';
+          button.classList.remove('btn-success');
+          button.classList.add('btn-outline-success');
+          codeInput.style.borderColor = '#28a745';
+        }, 1500);
+      } else {
+        alert('Please enter a valid 6-digit code.');
+      }
+    }
+
+    function startSelfieCapture() {
+      alert('Camera functionality would be implemented here. For demo purposes, please upload a photo instead.');
+    }
+
     // Handle modal redirects for services not implemented
     document.addEventListener('DOMContentLoaded', function() {
       // Initialize Bootstrap modals properly
@@ -1691,6 +2645,12 @@
         '#investment-details-modal', '#credit-card-details-modal', '#all-transactions-modal', 
         '#all-alerts-modal'
       ];
+      
+      // Initialize KYC modal when it's opened
+      const kycModal = document.getElementById('kyc-update-modal');
+      if (kycModal) {
+        kycModal.addEventListener('show.bs.modal', initializeKYCModal);
+      }
       
       modalLinks.forEach(link => {
         const element = document.querySelector(`[href="${link}"]`);
@@ -1721,7 +2681,36 @@
                 break;
               case '#help-modal':
                 title = 'Help & Support';
-                content = 'Get help with your banking needs. Chat with support or browse our FAQ section.';
+                content = `
+                  <div class="text-center mb-4">
+                    <i class="icon_lifesaver text-primary" style="font-size: 3rem;"></i>
+                  </div>
+                  <h6>How can we help you today?</h6>
+                  <div class="row mt-3">
+                    <div class="col-6 mb-3">
+                      <button class="btn btn-outline-primary w-100">
+                        <i class="icon_phone me-2"></i>Call Support
+                      </button>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <button class="btn btn-outline-primary w-100">
+                        <i class="icon_chat me-2"></i>Live Chat
+                      </button>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <button class="btn btn-outline-primary w-100">
+                        <i class="icon_mail_alt me-2"></i>Email Us
+                      </button>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <button class="btn btn-outline-primary w-100">
+                        <i class="icon_question me-2"></i>FAQ
+                      </button>
+                    </div>
+                  </div>
+                  <hr>
+                  <small class="text-muted">Our support team is available 24/7 to assist you with all your banking needs.</small>
+                `;
                 break;
             }
             

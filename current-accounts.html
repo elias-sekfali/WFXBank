@@ -1,0 +1,1424 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta content="noindex" name="robots" />
+    <meta charset="utf-8" />
+    <meta content="ie=edge" http-equiv="x-ua-compatible" />
+    <meta content="width=device-width,initial-scale=1.0" name="viewport" />
+    <title>Current Accounts - Whatfix Bank</title>
+    <link rel="icon" type="image/ico" href="img/favicon.ico" />
+    <link href="css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css">
+    <link href="css/elegant-icons.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="css/all.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="css/animate.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="css/nice-select.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="css/default.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="css/responsive.css" media="all" rel="stylesheet" type="text/css" />
+    <style>
+        /* Enhanced accessibility and contrast improvements */
+        :root {
+            --primary-blue: #1d4a6b;
+            --secondary-blue: #2563eb;
+            --accent-blue: #3b82f6;
+            --success-green: #059669;
+            --text-dark: #1f2937;
+            --text-muted: #6b7280;
+            --background-gray: #f9fafb;
+            --border-gray: #e5e7eb;
+        }
+        
+        /* Improved color contrast for accessibility (WCAG 2.0 AA compliant) */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #0f2027 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            min-height: 600px;
+            padding: 200px 0 120px 0;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 45%;
+            height: 100%;
+            background: url('img/card/hero-card.png') no-repeat center right;
+            background-size: contain;
+            opacity: 0.15;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .hero-content .lead {
+            font-size: 1.25rem;
+            font-weight: 400;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+                 /* WCAG Compliant button styling - Target Size minimum 44x44px */
+         .theme-btn {
+             min-height: 44px;
+             min-width: 44px;
+             padding: 12px 24px;
+             font-size: 16px;
+             font-weight: 600;
+             line-height: 1.5;
+             border-radius: 8px;
+             transition: all 0.3s ease;
+             text-decoration: none;
+             display: inline-flex;
+             align-items: center;
+             justify-content: center;
+             text-align: center;
+             border: 2px solid transparent;
+             cursor: pointer;
+             /* WCAG 2.1 - 2.5.5 Target Size */
+         }
+         
+         .theme-btn-lg {
+             min-height: 48px;
+             padding: 14px 32px;
+             font-size: 18px;
+             line-height: 1.4;
+         }
+         
+         .theme-btn-outline {
+             background: transparent;
+             color: white;
+             border: 2px solid white;
+         }
+         
+         .theme-btn-outline:hover,
+         .theme-btn-outline:focus {
+             background: white;
+             color: var(--primary-blue);
+             outline: 3px solid rgba(255, 255, 255, 0.5);
+             outline-offset: 2px;
+         }
+         
+         /* WCAG 2.1 - 2.4.7 Focus Visible */
+         .theme-btn:focus,
+         button:focus,
+         a:focus {
+             outline: 3px solid var(--accent-blue);
+             outline-offset: 2px;
+         }
+        
+        /* Improved feature cards */
+        .benefit-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid var(--border-gray);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+        }
+        
+        .benefit-card h5 {
+            color: var(--text-dark);
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .feature-icon-lg {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--accent-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+        }
+        
+        .feature-icon-lg i {
+            font-size: 32px;
+            color: white;
+        }
+        
+        /* Account comparison section improvements */
+        .account-comparison {
+            background: var(--background-gray);
+        }
+        
+        .comparison-table {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .table-primary {
+            background-color: #0f2027 !important;
+            color: white;
+        }
+        
+        .table thead.table-primary th {
+            background-color: #0f2027 !important;
+            border: none;
+            padding: 20px 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: white;
+        }
+        
+        .table tbody td {
+            padding: 18px 15px;
+            border-color: var(--border-gray);
+            vertical-align: middle;
+            font-size: 1rem;
+        }
+        
+        .table tbody td strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        /* Interest rates section */
+        .interest-rates {
+            background: linear-gradient(135deg, var(--background-gray) 0%, #f3f4f6 100%);
+        }
+        
+        .rate-card {
+            background: white;
+            border-radius: 16px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .rate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+        
+        .rate-card h5 {
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .rate-percentage {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary-blue);
+            margin-bottom: 0.5rem;
+        }
+        
+        .rate-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        /* Enhanced eligibility section */
+        .eligibility-section {
+            background: linear-gradient(rgba(29, 74, 107, 0.9), rgba(29, 74, 107, 0.9)),
+                        url('img/banner/bg-img-2.png') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+        
+        .eligibility-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: white;
+            color: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+        }
+        
+        .eligibility-section .card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        /* Security badges improvements */
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 8px 8px 8px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .security-badge i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        /* Section title improvements */
+        .section-title h2 {
+            color: var(--text-dark);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            line-height: 1.6;
+        }
+        
+        /* Digital banking section */
+        .digital-banking-content h2 {
+            color: var(--text-dark);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-item h6 {
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .feature-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        /* App download buttons */
+        .app-download-buttons img {
+            height: 55px;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+        }
+        
+        .app-download-buttons img:hover {
+            transform: scale(1.05);
+        }
+        
+                 /* CTA section improvements */
+         .cta-area {
+             background: linear-gradient(135deg, var(--background-gray) 0%, #f3f4f6 100%);
+         }
+         
+         .cta-content h3 {
+             color: var(--text-dark);
+             font-size: 2.2rem;
+             font-weight: 700;
+             margin-bottom: 1rem;
+         }
+         
+         .cta-content p {
+             color: var(--text-muted);
+             font-size: 1.1rem;
+             line-height: 1.6;
+         }
+         
+         .cta-features {
+             display: flex;
+             flex-wrap: wrap;
+             gap: 25px;
+         }
+         
+         .cta-feature-item {
+             display: flex;
+             align-items: center;
+             gap: 8px;
+             color: var(--text-dark);
+             font-weight: 500;
+         }
+         
+         .cta-feature-item i {
+             color: var(--success-green);
+             font-size: 16px;
+         }
+         
+         .btn-primary {
+             background: var(--secondary-blue);
+             border: 2px solid var(--secondary-blue);
+             color: white;
+             font-weight: 600;
+         }
+         
+         .btn-primary:hover {
+             background: var(--primary-blue);
+             border-color: var(--primary-blue);
+             transform: translateY(-2px);
+         }
+         
+         .cta-help {
+             margin-top: 10px;
+         }
+         
+         .cta-help small {
+             color: var(--text-muted);
+         }
+         
+         .cta-help a {
+             color: var(--secondary-blue);
+             text-decoration: none;
+             font-weight: 600;
+         }
+         
+         .cta-help a:hover {
+             text-decoration: underline;
+         }
+        
+                 /* WCAG 2.1 Text Spacing Requirements - 1.4.12 */
+         body {
+             line-height: 1.5;
+             letter-spacing: normal;
+             word-spacing: normal;
+         }
+         
+         p, li, span, div:not(.icon) {
+             line-height: 1.5;
+         }
+         
+         /* Text should be readable with enhanced spacing */
+         .enhanced-spacing p {
+             line-height: 1.5;
+             letter-spacing: 0.12em;
+             word-spacing: 0.16em;
+         }
+         
+         /* Visually hidden class for screen readers */
+         .visually-hidden {
+             position: absolute !important;
+             width: 1px !important;
+             height: 1px !important;
+             padding: 0 !important;
+             margin: -1px !important;
+             overflow: hidden !important;
+             clip: rect(0, 0, 0, 0) !important;
+             white-space: nowrap !important;
+             border: 0 !important;
+         }
+         
+         /* Skip link for keyboard navigation - WCAG 2.1 - 2.4.1 */
+         .skip-link {
+             position: absolute;
+             top: -40px;
+             left: 6px;
+             background: var(--primary-blue);
+             color: white;
+             padding: 8px;
+             text-decoration: none;
+             border-radius: 4px;
+             z-index: 9999;
+         }
+         
+         .skip-link:focus {
+             top: 6px;
+         }
+         
+         /* Enhanced contrast for better accessibility */
+         .text-success {
+             color: #0f7b0f !important; /* Higher contrast green */
+         }
+         
+         .text-danger {
+             color: #dc2626 !important; /* Higher contrast red */
+         }
+         
+         .text-primary {
+             color: var(--primary-blue) !important;
+         }
+         
+         /* Mobile responsiveness improvements */
+         @media (max-width: 768px) {
+             .hero-content h1 {
+                 font-size: 2.2rem;
+             }
+             
+             .hero-section {
+                 padding: 80px 0;
+                 min-height: 500px;
+             }
+             
+             .section-title h2 {
+                 font-size: 2rem;
+             }
+             
+             .rate-percentage {
+                 font-size: 2.5rem;
+             }
+             
+             .benefit-card {
+                 padding: 30px 20px;
+             }
+             
+             .security-badge {
+                 font-size: 13px;
+                 padding: 8px 14px;
+             }
+             
+             .banking-benefits-grid {
+                 grid-template-columns: 1fr;
+                 gap: 20px;
+             }
+         }
+        
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-content .lead {
+                font-size: 1.1rem;
+            }
+            
+            .theme-btn-lg {
+                padding: 14px 28px;
+                font-size: 16px;
+            }
+            
+            .feature-icon-lg {
+                width: 70px;
+                height: 70px;
+            }
+            
+                         .feature-icon-lg i {
+                 font-size: 26px;
+             }
+         }
+         
+         /* WCAG Compliant hero visual section */
+         .banking-benefits-grid {
+             display: grid;
+             grid-template-columns: repeat(2, 1fr);
+             gap: 30px;
+             max-width: 500px;
+             margin: 0 auto;
+         }
+         
+         .benefit-item {
+             background: rgba(255, 255, 255, 0.1);
+             backdrop-filter: blur(10px);
+             border: 1px solid rgba(255, 255, 255, 0.2);
+             border-radius: 16px;
+             padding: 25px 20px;
+             text-align: center;
+             transition: all 0.3s ease;
+         }
+         
+         .benefit-item:hover,
+         .benefit-item:focus-within {
+             background: rgba(255, 255, 255, 0.15);
+             transform: translateY(-5px);
+         }
+         
+         .benefit-icon {
+             width: 60px;
+             height: 60px;
+             background: rgba(255, 255, 255, 0.9);
+             border-radius: 50%;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             margin: 0 auto 15px;
+             color: var(--primary-blue);
+         }
+         
+         .benefit-icon i {
+             font-size: 24px;
+         }
+         
+         .benefit-item h4 {
+             color: white;
+             font-size: 1.1rem;
+             font-weight: 600;
+             margin-bottom: 8px;
+             /* WCAG 2.1 - 1.4.12 Text Spacing */
+             line-height: 1.5;
+         }
+         
+         .benefit-item p {
+             color: rgba(255, 255, 255, 0.9);
+             font-size: 0.9rem;
+             margin: 0;
+             line-height: 1.5;
+         }
+         
+         /* Digital banking image enhancements */
+         .digital-banking-image {
+             position: relative;
+         }
+         
+         .digital-banking-image::before {
+             content: '';
+             position: absolute;
+             top: -20px;
+             left: -20px;
+             right: -20px;
+             bottom: -20px;
+             background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(59, 130, 246, 0.05));
+             border-radius: 20px;
+             z-index: -1;
+         }
+         
+         .digital-banking-image img {
+             border-radius: 15px;
+             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+         }
+         
+         /* Banking mockup enhancements */
+         .banking-mockup {
+             position: relative;
+             display: inline-block;
+         }
+         
+         .main-device {
+             max-width: 100%;
+             height: auto;
+         }
+         
+         .app-features-overlay {
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             pointer-events: none;
+         }
+         
+         .feature-badge {
+             position: absolute;
+             background: white;
+             color: var(--primary-blue);
+             padding: 8px 16px;
+             border-radius: 25px;
+             font-size: 12px;
+             font-weight: 600;
+             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+             display: flex;
+             align-items: center;
+             gap: 6px;
+             animation: pulse 2s ease-in-out infinite;
+         }
+         
+         .feature-badge i {
+             font-size: 14px;
+             color: var(--success-green);
+         }
+         
+         .feature-1 {
+             top: 15%;
+             left: -10%;
+             animation-delay: 0.5s;
+         }
+         
+         .feature-2 {
+             top: 45%;
+             right: -15%;
+             animation-delay: 1s;
+         }
+         
+         .feature-3 {
+             bottom: 20%;
+             left: -5%;
+             animation-delay: 1.5s;
+         }
+         
+         @keyframes pulse {
+             0%, 100% {
+                 transform: scale(1);
+                 opacity: 0.9;
+             }
+             50% {
+                 transform: scale(1.05);
+                 opacity: 1;
+             }
+         }
+         
+         /* Statistics section */
+         .stats-section {
+             background: var(--primary-blue);
+             color: white;
+         }
+         
+         .stat-item {
+             text-align: center;
+             padding: 30px 20px;
+         }
+         
+         .stat-number {
+             font-size: 3rem;
+             font-weight: 700;
+             color: white;
+             margin-bottom: 0.5rem;
+         }
+         
+         .stat-label {
+             font-size: 1.1rem;
+             opacity: 0.9;
+         }
+         
+         /* Enhanced table styling */
+         .table-responsive {
+             border-radius: 16px;
+             overflow: hidden;
+         }
+         
+         .table {
+             margin-bottom: 0;
+         }
+         
+         .table tbody tr:hover {
+             background-color: rgba(37, 99, 235, 0.02);
+         }
+         
+         /* Improved mobile responsiveness for banking mockup */
+         @media (max-width: 768px) {
+             .feature-badge {
+                 font-size: 10px;
+                 padding: 6px 12px;
+             }
+             
+             .feature-1 {
+                 left: 5%;
+             }
+             
+             .feature-2 {
+                 right: 5%;
+             }
+             
+             .feature-3 {
+                 left: 10%;
+             }
+             
+             .floating-1, .floating-2, .floating-3 {
+                 width: 40px;
+                 height: 40px;
+                 font-size: 16px;
+             }
+         }
+    </style>
+</head>
+<body>
+    <!-- Skip link for keyboard navigation - WCAG 2.1 Bypass Blocks -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header class="header" role="banner">
+        <div class="header-top py-2 bg_white">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-5">
+                        <div class="header-info-left">
+                            <div class="timestamp ms-4"><i class="icon_clock_alt"></i> Mon - Fri 10:00-18:00</div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="header-info-right">
+                            <ul>
+                                <li><img alt="phone" class="img-fluid" src="img/phone-outline-white.png" /><a href="tel:+443300543073">+44 330 054 3073</a></li>
+                                <li><i class="icon_mail_alt"></i><a href="mailto:info@whatfixbank.com">info@whatfixbank.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-menu header-menu-3" id="sticky">
+            <nav class="navbar navbar-expand-lg" role="navigation" aria-label="Main navigation">
+                <div class="container">
+                    <a class="navbar-brand sticky_logo" href="index.html" aria-label="Whatfix Bank - Homepage">
+                        <img alt="Whatfix Bank Logo" class="main" src="img/logo/Logo.png" srcset="img/logo/Logo@2x.png 2x" />
+                        <img alt="Whatfix Bank Logo" class="sticky" src="img/logo/Logo-2.png" srcset="img/logo/Logo-2@2x.png 2x" />
+                    </a>
+                    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle main navigation menu" class="navbar-toggler collapsed" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+                        <span class="menu_toggle">
+                            <span class="hamburger"><span></span><span></span><span></span></span>
+                            <span class="hamburger-cross"><span></span><span></span></span>
+                        </span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav menu ms-auto" role="menubar">
+                            <li class="nav-item dropdown submenu">
+                                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">Bank</a>
+                                <i aria-hidden="true" class="arrow_carrot-down_alt2 mobile_dropdown_icon" data-bs-toggle="dropdown"></i>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="current-accounts.html">Current Accounts</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="premier-current-account.html">Premier Current Account</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="student-account.html">Student Account</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="make-the-switch.html">Make the Switch</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown submenu">
+                                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">Borrow</a>
+                                <i aria-hidden="true" class="arrow_carrot-down_alt2 mobile_dropdown_icon" data-bs-toggle="dropdown"></i>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="loan-details.html">Personal Loan</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="car-loan.html">Car Loan</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown submenu">
+                                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">Cards</a>
+                                <i aria-hidden="true" class="arrow_carrot-down_alt2 mobile_dropdown_icon" data-bs-toggle="dropdown"></i>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="credit-card.html">Credit Card</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="premier-credit-card.html">Premier Credit Card</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown submenu">
+                                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">Savings</a>
+                                <i aria-hidden="true" class="arrow_carrot-down_alt2 mobile_dropdown_icon" data-bs-toggle="dropdown"></i>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="cash-stock-isa.html">Cash and Stock ISA</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="fund-plans.html">Fund Plans</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="investment-advice.html">Investment Advice</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown submenu">
+                                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">Mortgage</a>
+                                <i aria-hidden="false" class="arrow_carrot-down_alt2 mobile_dropdown_icon" data-bs-toggle="dropdown"></i>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="first-time-buyer.html">First Time Buyer</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="remortgage.html">Remortgage</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="mortgage-rates.html">Mortgage Rates</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown submenu">
+                                <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">Help and Support</a>
+                                <i aria-hidden="false" class="arrow_carrot-down_alt2 mobile_dropdown_icon" data-bs-toggle="dropdown"></i>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <a class="theme-btn" href="login.html">Log In</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" role="main">
+        <!-- Enhanced Hero Section -->
+        <section class="hero-section pt-400 pb-150" role="banner" aria-labelledby="hero-heading">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="hero-content">
+                            <h1 id="hero-heading" class="mb-4">Current Accounts Designed for Modern Banking</h1>
+                            <p class="mb-4 lead">Experience seamless banking with our range of current accounts. From basic everyday banking to premium features, we have the perfect account to match your lifestyle.</p>
+                            <div class="hero-features mb-4" role="list" aria-label="Key banking features">
+                                <div class="security-badge" role="listitem">
+                                    <i class="icon_shield" aria-hidden="true"></i>
+                                    <span>FSCS Protected up to £85,000</span>
+                                </div>
+                                <div class="security-badge" role="listitem">
+                                    <i class="icon_mobile" aria-hidden="true"></i>
+                                    <span>Award-winning Mobile App</span>
+                                </div>
+                                <div class="security-badge" role="listitem">
+                                    <i class="icon_creditcard" aria-hidden="true"></i>
+                                    <span>Contactless Payments</span>
+                                </div>
+                            </div>
+                            <div class="hero-buttons" role="group" aria-label="Primary actions">
+                                <a href="loan-apply.html" class="theme-btn theme-btn-lg me-3" 
+                                   aria-describedby="hero-heading">Open Account</a>
+                                <a href="#comparison" class="theme-btn theme-btn-outline"
+                                   aria-label="Compare account types">Compare Accounts</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="hero-visual text-center">
+                            <div class="banking-benefits-grid">
+                                <div class="benefit-item" data-aos="fade-up" data-aos-delay="100">
+                                    <div class="benefit-icon">
+                                        <i class="icon_shield" aria-hidden="true"></i>
+                                    </div>
+                                    <h4>Secure Banking</h4>
+                                    <p>Bank-level encryption and fraud protection</p>
+                                </div>
+                                <div class="benefit-item" data-aos="fade-up" data-aos-delay="200">
+                                    <div class="benefit-icon">
+                                        <i class="icon_mobile" aria-hidden="true"></i>
+                                    </div>
+                                    <h4>Mobile First</h4>
+                                    <p>Award-winning mobile banking app</p>
+                                </div>
+                                <div class="benefit-item" data-aos="fade-up" data-aos-delay="300">
+                                    <div class="benefit-icon">
+                                        <i class="icon_creditcard" aria-hidden="true"></i>
+                                    </div>
+                                    <h4>Instant Access</h4>
+                                    <p>Contactless payments and instant transfers</p>
+                                </div>
+                                <div class="benefit-item" data-aos="fade-up" data-aos-delay="400">
+                                    <div class="benefit-icon">
+                                        <i class="icon_headphones" aria-hidden="true"></i>
+                                    </div>
+                                    <h4>24/7 Support</h4>
+                                    <p>Round-the-clock customer assistance</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features Section -->
+        <section class="pt-100 pb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <div class="section-title text-center mb-80">
+                            <h2>Why Choose Our Current Accounts?</h2>
+                            <p>Experience banking that works around your life with innovative features and unmatched convenience.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gy-4">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card text-center">
+                            <div class="feature-icon-lg">
+                                <i class="icon_mobile"></i>
+                            </div>
+                            <h5 class="mb-3">Mobile Banking</h5>
+                            <p>Bank on the go with our award-winning mobile app. Transfer money, pay bills, and manage your account 24/7.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card text-center">
+                            <div class="feature-icon-lg">
+                                <i class="icon_shield"></i>
+                            </div>
+                            <h5 class="mb-3">Bank-Level Security</h5>
+                            <p>Your money and data are protected with advanced encryption and fraud monitoring systems.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card text-center">
+                            <div class="feature-icon-lg">
+                                <i class="icon_creditcard"></i>
+                            </div>
+                            <h5 class="mb-3">Contactless Payments</h5>
+                            <p>Tap to pay with your contactless debit card or use your phone for quick and secure payments.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card text-center">
+                            <div class="feature-icon-lg">
+                                <i class="icon_headphones"></i>
+                            </div>
+                            <h5 class="mb-3">24/7 Support</h5>
+                            <p>Get help when you need it with our round-the-clock customer support via phone, chat, or email.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Account Comparison Section -->
+        <section class="account-comparison pt-100 pb-100" id="comparison" aria-labelledby="comparison-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <div class="section-title text-center mb-80">
+                            <h2 id="comparison-heading">Compare Our Current Accounts</h2>
+                            <p>Find the perfect account for your needs with our comprehensive comparison guide.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-table p-4">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" role="table" aria-describedby="comparison-heading">
+                            <caption class="visually-hidden">
+                                Comparison of current account features across Basic, Standard, and Premium account types
+                            </caption>
+                            <thead class="table-primary">
+                                <tr>
+                                    <th scope="col" id="features-col">Features</th>
+                                    <th scope="col" class="text-center" id="basic-col">Basic Account</th>
+                                    <th scope="col" class="text-center" id="standard-col">Standard Account</th>
+                                    <th scope="col" class="text-center" id="premium-col">Premium Account</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Monthly Fee</th>
+                                    <td class="text-center">£0</td>
+                                    <td class="text-center">£8</td>
+                                    <td class="text-center">£15</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Overdraft Facility</th>
+                                    <td class="text-center">
+                                        <i class="icon_close text-danger" aria-hidden="true"></i>
+                                        <span class="visually-hidden">Not available</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="icon_check text-success" aria-hidden="true"></i>
+                                        <span class="visually-hidden">Available</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="icon_check text-success" aria-hidden="true"></i>
+                                        <span class="visually-hidden">Available</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">International Transfers</th>
+                                    <td class="text-center">£5 per transfer</td>
+                                    <td class="text-center">5 free per month</td>
+                                    <td class="text-center">Unlimited free</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Travel Insurance</th>
+                                    <td class="text-center">
+                                        <i class="icon_close text-danger" aria-hidden="true"></i>
+                                        <span class="visually-hidden">Not included</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="icon_close text-danger" aria-hidden="true"></i>
+                                        <span class="visually-hidden">Not included</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="icon_check text-success" aria-hidden="true"></i>
+                                        <span class="visually-hidden">Included</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Cashback Rewards</th>
+                                    <td class="text-center">
+                                        <i class="icon_close text-danger" aria-hidden="true"></i>
+                                        <span class="visually-hidden">No cashback</span>
+                                    </td>
+                                    <td class="text-center">0.5%</td>
+                                    <td class="text-center">1.5%</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Priority Support</th>
+                                    <td class="text-center">
+                                        <i class="icon_close text-danger" aria-hidden="true"></i>
+                                        <span class="visually-hidden">Standard support</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="icon_check text-success" aria-hidden="true"></i>
+                                        <span class="visually-hidden">Priority support available</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="icon_check text-success" aria-hidden="true"></i>
+                                        <span class="visually-hidden">Priority support available</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Actions</th>
+                                    <td class="text-center">
+                                        <a href="loan-apply.html" class="theme-btn" 
+                                           aria-label="Open Basic Account">Open Account</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="loan-apply.html" class="theme-btn"
+                                           aria-label="Open Standard Account">Open Account</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="premier-current-account.html" class="theme-btn"
+                                           aria-label="Learn more about Premium Account">Learn More</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interest Rates Section -->
+        <section class="interest-rates pt-100 pb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <div class="section-title text-center mb-80">
+                            <h2>Current Interest Rates</h2>
+                            <p>Competitive rates that help your money work harder for you.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gy-4">
+                    <div class="col-lg-4">
+                        <div class="rate-card">
+                            <h5 class="mb-3">Credit Interest</h5>
+                            <div class="rate-percentage">1.25%</div>
+                            <p class="mb-0">AER on balances over £1,000</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="rate-card">
+                            <h5 class="mb-3">Arranged Overdraft</h5>
+                            <div class="rate-percentage">19.9%</div>
+                            <p class="mb-0">EAR on arranged overdrafts</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="rate-card">
+                            <h5 class="mb-3">Unarranged Overdraft</h5>
+                            <div class="rate-percentage">39.9%</div>
+                            <p class="mb-0">EAR on unarranged overdrafts</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12 text-center">
+                        <p class="text-muted"><small>Rates are variable and subject to change. Terms and conditions apply.</small></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Eligibility & Application Process -->
+        <section class="eligibility-section pt-100 pb-100">
+            <div class="container">
+                <div class="eligibility-content">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2">
+                            <div class="section-title text-center mb-80">
+                                <h2 class="text-white">Eligibility & Application Process</h2>
+                                <p class="text-white">Opening your account is quick and simple. Here's what you need to know.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row gy-4">
+                        <div class="col-lg-6">
+                            <div class="card h-100">
+                                <div class="card-body p-4">
+                                    <h5 class="card-title mb-4"><i class="icon_check_alt2 text-success me-2"></i>Eligibility Requirements</h5>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3"><i class="icon_check text-success me-2"></i> Be 18 years or older</li>
+                                        <li class="mb-3"><i class="icon_check text-success me-2"></i> UK resident for at least 3 years</li>
+                                        <li class="mb-3"><i class="icon_check text-success me-2"></i> Proof of identity and address</li>
+                                        <li class="mb-3"><i class="icon_check text-success me-2"></i> Pass our affordability assessment</li>
+                                        <li class="mb-0"><i class="icon_check text-success me-2"></i> No recent bankruptcy or IVA</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card h-100">
+                                <div class="card-body p-4">
+                                    <h5 class="card-title mb-4"><i class="icon_documents_alt text-primary me-2"></i>Required Documents</h5>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3"><i class="icon_document text-primary me-2"></i> Valid passport or driving license</li>
+                                        <li class="mb-3"><i class="icon_house text-primary me-2"></i> Utility bill (within 3 months)</li>
+                                        <li class="mb-3"><i class="icon_building text-primary me-2"></i> Employment letter or payslip</li>
+                                        <li class="mb-3"><i class="icon_creditcard text-primary me-2"></i> Bank statements (last 3 months)</li>
+                                        <li class="mb-0"><i class="icon_profile text-primary me-2"></i> National Insurance number</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="text-center text-white">
+                                <div class="step-number">1</div>
+                                <h6>Apply Online</h6>
+                                <p class="mb-0">Complete our quick 5-minute application form</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="text-center text-white">
+                                <div class="step-number">2</div>
+                                <h6>Identity Check</h6>
+                                <p class="mb-0">Verify your identity using our secure system</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="text-center text-white">
+                                <div class="step-number">3</div>
+                                <h6>Instant Decision</h6>
+                                <p class="mb-0">Get an immediate decision on your application</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="text-center text-white">
+                                <div class="step-number">4</div>
+                                <h6>Start Banking</h6>
+                                <p class="mb-0">Receive your card and start banking immediately</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Digital Banking Features -->
+        <section class="pt-100 pb-100">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="digital-banking-content">
+                            <h2 class="mb-4">Award-Winning Digital Banking</h2>
+                            <p class="mb-4">Experience the future of banking with our innovative digital platform. Manage your money, make payments, and track spending all from one secure app.</p>
+                            <div class="feature-list">
+                                <div class="feature-item d-flex align-items-center mb-3">
+                                    <div class="feature-icon me-3">
+                                        <img src="img/card/money-transfer.png" alt="Money Transfer" width="40">
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1">Instant Transfers</h6>
+                                        <p class="mb-0 text-muted">Send money to friends and family instantly</p>
+                                    </div>
+                                </div>
+                                <div class="feature-item d-flex align-items-center mb-3">
+                                    <div class="feature-icon me-3">
+                                        <img src="img/card/reminder.png" alt="Smart Notifications" width="40">
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1">Smart Notifications</h6>
+                                        <p class="mb-0 text-muted">Get alerts for transactions and account activity</p>
+                                    </div>
+                                </div>
+                                <div class="feature-item d-flex align-items-center mb-3">
+                                    <div class="feature-icon me-3">
+                                        <img src="img/card/refresh.png" alt="Real-time Updates" width="40">
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-1">Real-time Balance</h6>
+                                        <p class="mb-0 text-muted">See your balance update instantly with every transaction</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="app-download-buttons mt-4">
+                                <a href="#" class="me-3">
+                                    <img src="img/client/Apple store.png" alt="Download on App Store" height="50">
+                                </a>
+                                <a href="#">
+                                    <img src="img/client/Google play.png" alt="Get it on Google Play" height="50">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="digital-banking-image text-center">
+                            <div class="banking-mockup">
+                                <img src="img/online-banking.png" alt="Mobile Banking App Interface" class="img-fluid main-device">
+                                <div class="app-features-overlay">
+                                    <div class="feature-badge feature-1">
+                                        <i class="icon_check"></i>
+                                        <span>Instant Transfer</span>
+                                    </div>
+                                    <div class="feature-badge feature-2">
+                                        <i class="icon_shield"></i>
+                                        <span>Secure Login</span>
+                                    </div>
+                                    <div class="feature-badge feature-3">
+                                        <i class="icon_creditcard"></i>
+                                        <span>Card Control</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="stats-section py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-item">
+                            <div class="stat-number">500K+</div>
+                            <div class="stat-label">Happy Customers</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-item">
+                            <div class="stat-number">£2.5B</div>
+                            <div class="stat-label">Assets Under Management</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-item">
+                            <div class="stat-number">99.9%</div>
+                            <div class="stat-label">Uptime Guaranteed</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stat-item">
+                            <div class="stat-number">4.8★</div>
+                            <div class="stat-label">App Store Rating</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-area pt-100 pb-100">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <div class="cta-content">
+                            <h3>Ready to Open Your Current Account?</h3>
+                            <p>Join thousands of satisfied customers who have made the switch to smarter banking. Quick online application with instant approval available.</p>
+                            <div class="cta-features mt-4">
+                                <div class="cta-feature-item">
+                                    <i class="icon_clock_alt"></i>
+                                    <span>5-minute application</span>
+                                </div>
+                                <div class="cta-feature-item">
+                                    <i class="icon_check"></i>
+                                    <span>Instant approval</span>
+                                </div>
+                                <div class="cta-feature-item">
+                                    <i class="icon_shield"></i>
+                                    <span>Bank-level security</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <div class="cta-buttons">
+                            <a href="loan-apply.html" class="theme-btn theme-btn-lg btn-primary mb-3">Apply Now</a>
+                            <div class="cta-help">
+                                <small>Need help? Call us at <a href="tel:+443300543073" class="text-primary">+44 330 054 3073</a></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- footer -->
+    <footer class="footer footer-3" wfx_id="feature-element-component-n-">
+        <div class="footer-top pt-200 pb-lg-115 pb-120" wfx_id="feature-element-component-n-">
+            <div class="container" wfx_id="feature-element-component-n-">
+                <div class="row gx-0 pt-45" wfx_id="feature-element-component-n-">
+                    <div class="col-lg-4 col-sm-6 text-center text-sm-start ms-0" wfx_id="feature-column-service-o">
+                        <div class="footer-widget wow fadeInLeft mb-30" wfx_id="feature-element-component-o-">
+                            <div class="footer-text mb-20" wfx_id="feature-element-component-o-">
+                                <p>Whatfix Bank is a demo platform designed for training and demonstration purposes only. Experience our digital banking solutions in a safe, simulated environment.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6 text-center text-sm-start ms-lg-5"
+                        wfx_id="feature-element-component-p-">
+                        <div class="footer-widget mb-30 wow fadeInUp" data-wow-delay="0.1s"
+                            wfx_id="feature-element-component-p-">
+                            <div class="f-widget-title" wfx_id="feature-element-component-p-">
+                                <h5>About Whatfix Bank</h5>
+                            </div>
+                            <div class="footer-link" wfx_id="corporate-element-home-q">
+                                <ul wfx_id="corporate-element-home-q-d">
+                                    <li wfx_id="corporate-element-home-q-e"><a href="index.html"
+                                            wfx_id="corporate-element-home-q-f">Our Services</a></li>
+                                    <li wfx_id="corporate-element-home-q-g"><a href="contact.html"
+                                            wfx_id="corporate-element-home-q-h">Company Purpose</a></li>
+                                    <li wfx_id="corporate-element-home-r"><a href="job-application.html"
+                                            wfx_id="corporate-element-home-r-j">Careers</a></li>
+                                    <li wfx_id="corporate-element-home-r-k"><a href="contact.html"
+                                            wfx_id="corporate-element-home-r-l">Corporate Responsibility</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6 text-center text-sm-start ms-lg-5" wfx_id="corporate-element-home-s">
+                        <div class="footer-widget mb-30 wow fadeInUp" data-wow-delay="0.3s"
+                            wfx_id="footer-links-section-home-s">
+                            <div class="f-widget-title" wfx_id="footer-element-home-s">
+                                <h5>Resources</h5>
+                            </div>
+                            <div class="footer-link" wfx_id="footer-element-home-t">
+                                <ul wfx_id="footer-element-home-t-c">
+                                    <li wfx_id="footer-element-home-t-d"><a href="contact.html" wfx_id="footer-element-home-t-e">
+                                            Help Center</a></li>
+                                    <li wfx_id="footer-element-home-t-f"><a href="index.html#security" wfx_id="footer-element-home-t-g">
+                                            Security Information</a></li>
+                                    <li wfx_id="footer-element-home-t-h"><a href="index.html#faq" wfx_id="footer-element-home-u">
+                                            FAQ</a></li>
+                                    <li wfx_id="footer-element-home-u-j"><a href="contact.html" wfx_id="footer-element-home-u-k">
+                                            Contact Support</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6 text-center text-sm-start me-0 ms-lg-5"
+                        wfx_id="footer-element-home-u-l">
+                        <div class="footer-widget mb-30 wow fadeInUp" data-wow-delay="0.5s"
+                            wfx_id="footer-links-section-home-v">
+                            <div class="f-widget-title" wfx_id="footer-element-home-v">
+                                <h5>Quick Links</h5>
+                            </div>
+                            <div class="footer-link" wfx_id="footer-element-home-v-n">
+                                <ul wfx_id="footer-element-home-v-o">
+                                    <li wfx_id="footer-element-home-v-p"><a href="login.html" wfx_id="footer-element-home-w">Login</a></li>
+                                    <li wfx_id="footer-element-home-w-r"><a href="loan-apply.html"
+                                            wfx_id="footer-element-home-w-s">Apply for Loan</a></li>
+                                    <li wfx_id="footer-element-home-w-t"><a href="onlinebanking-home.html"
+                                            wfx_id="footer-element-home-w-u">Open Account</a></li>
+                                    <li wfx_id="footer-element-home-w-v"><a href="contact.html" wfx_id="footer-element-home-x">Find Branch</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- copyright area -->
+        <div class="copyright pt-25 pb-25" wfx_id="footer-element-home-x-x">
+            <div class="container" wfx_id="footer-element-home-x-y">
+                <div class="row justify-content-center" wfx_id="footer-element-home-x-z">
+                    <div class="col-lg-5 text-center my-3 my-sm-0" wfx_id="feature-element-component-z">
+                        <div class="copyright-text" wfx_id="feature-element-component-z-">
+                            <p>Made with ❤️ by <a href="https://whatfix.com" target="_blank">Whatfix BFSI Team</a> | Copyright © Whatfix 2025<br class="d-sm-none" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer end -->
+
+    <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="js/custom.js" type="text/javascript"></script>
+</body>
+</html> 
