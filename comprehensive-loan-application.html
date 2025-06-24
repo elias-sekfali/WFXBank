@@ -127,8 +127,13 @@
       padding: 20px;
       margin: 20px 0;
     }
-    /* Fix dropdown styling to match input fields */
-    select.w-100, select {
+    /* Custom dropdown styling */
+    .custom-dropdown {
+      position: relative;
+      display: block;
+      width: 100%;
+    }
+    .custom-dropdown-selected {
       background: white;
       border: 1px solid #ced4da;
       border-radius: 0.375rem;
@@ -136,12 +141,140 @@
       font-size: 1rem;
       line-height: 1.5;
       color: #495057;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
-    select.w-100:focus, select:focus {
+    .custom-dropdown-selected:hover,
+    .custom-dropdown-selected:focus {
       border-color: #0050b2;
       outline: 0;
       box-shadow: 0 0 0 0.2rem rgba(0, 80, 178, 0.25);
+    }
+    .custom-dropdown-selected.placeholder {
+      color: #6c757d;
+    }
+    .custom-dropdown-arrow {
+      transition: transform 0.3s ease;
+    }
+    .custom-dropdown.open .custom-dropdown-arrow {
+      transform: rotate(180deg);
+    }
+    .custom-dropdown-options {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border: 1px solid #ced4da;
+      border-top: none;
+      border-radius: 0 0 0.375rem 0.375rem;
+      max-height: 200px;
+      overflow-y: auto;
+      z-index: 9999;
+      display: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    /* Ensure loan-specific dropdowns work properly */
+    .loan-specific-section .custom-dropdown {
+      position: relative;
+      z-index: 1;
+    }
+    .loan-specific-section .custom-dropdown.open .custom-dropdown-options {
+      z-index: 9999;
+    }
+    
+    /* Ensure navigation buttons stay below dropdowns */
+    .nav-buttons {
+      position: relative;
+      z-index: 1;
+    }
+    .nav-btn .btn {
+      position: relative;
+      z-index: 1;
+    }
+    .custom-dropdown.open .custom-dropdown-options {
+      display: block;
+      z-index: 9999 !important;
+    }
+    
+    /* Ensure open dropdowns are always on top */
+    .custom-dropdown.open {
+      z-index: 9998;
+    }
+    .custom-dropdown-option {
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+    .custom-dropdown-option:hover {
+      background-color: #f8f9fa;
+    }
+    .custom-dropdown-option.selected {
+      background-color: #0050b2;
+      color: white;
+    }
+    
+    /* Ensure dropdowns are clickable and properly sized */
+    .custom-dropdown {
+      min-height: 38px;
+      position: relative;
+    }
+    .custom-dropdown-selected {
+      min-height: 36px;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+      z-index: 1;
+    }
+    .custom-dropdown-option {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Prevent other elements from overlapping dropdowns */
+    .form-step {
+      position: relative;
+    }
+    .loan-details-widget {
+      position: relative;
+      overflow: visible;
+    }
+    
+    /* Address template styling */
+    .address-template-selector {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 5px;
+      border: 1px solid #dee2e6;
+    }
+    .address-template-option {
+      margin-bottom: 10px;
+    }
+    .address-template-option:last-child {
+      margin-bottom: 0;
+    }
+    .address-preview {
+      margin-top: 10px;
+      padding: 10px;
+      background: white;
+      border: 1px solid #dee2e6;
+      border-radius: 3px;
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+    .address-fields.manual-entry {
+      display: block;
+    }
+    .address-fields.template-selected {
+      display: none;
     }
     .form-step {
       display: none;
@@ -262,12 +395,19 @@
           <div class="col-md-5" wfx_id="header-element-component-l-c">
             <div class="header-info-left" wfx_id="header-element-component-l-d">
               <div class="language-list" wfx_id="header-element-language-selector-l">
-                <select id="select-lang" wfx_id="header-element-language-selector-m">
-                  <option value="English">English</option>
-                  <option value="Bangla">Bangla</option>
-                  <option value="French">French</option>
-                  <option value="Hindi">Hindi</option>
-                </select>
+                <div class="custom-dropdown" data-name="language" style="min-width: 120px;">
+                  <div class="custom-dropdown-selected" tabindex="0" style="font-size: 0.9rem; padding: 0.25rem 0.5rem;">
+                    <span>English</span>
+                    <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                  </div>
+                  <div class="custom-dropdown-options">
+                    <div class="custom-dropdown-option selected" data-value="English">English</div>
+                    <div class="custom-dropdown-option" data-value="Bangla">Bangla</div>
+                    <div class="custom-dropdown-option" data-value="French">French</div>
+                    <div class="custom-dropdown-option" data-value="Hindi">Hindi</div>
+                  </div>
+                </div>
+                <input type="hidden" id="select-lang" name="language" value="English" wfx_id="header-element-language-selector-m" />
               </div>
               <div class="timestamp ms-4" wfx_id="header-element-business-hours"> <i class="icon_clock_alt"></i> Mon - Fri 10:00-18:00</div>
             </div>
@@ -546,23 +686,35 @@
                   <div class="row gy-4">
                     <div class="col-md-6">
                       <label class="label required-field" for="financingType">Financing Type</label>
-                      <select class="w-100" id="financingType" name="financingType" required>
-                        <option value="">Choose financing type</option>
-                        <option value="Debt-Financing">Debt Financing</option>
-                        <option value="Equity-Finance">Equity Finance</option>
-                        <option value="Asset-Based">Asset Based Financing</option>
-                        <option value="Invoice-Financing">Invoice Financing</option>
-                      </select>
+                      <div class="custom-dropdown" data-name="financingType" data-required="true">
+                        <div class="custom-dropdown-selected placeholder" tabindex="0">
+                          <span>Choose financing type</span>
+                          <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                        </div>
+                        <div class="custom-dropdown-options">
+                          <div class="custom-dropdown-option" data-value="Debt-Financing">Debt Financing</div>
+                          <div class="custom-dropdown-option" data-value="Equity-Finance">Equity Finance</div>
+                          <div class="custom-dropdown-option" data-value="Asset-Based">Asset Based Financing</div>
+                          <div class="custom-dropdown-option" data-value="Invoice-Financing">Invoice Financing</div>
+                        </div>
+                      </div>
+                      <input type="hidden" id="financingType" name="financingType" required />
                     </div>
                     <div class="col-md-6">
                       <label class="label required-field" for="bankService">Bank Service</label>
-                      <select class="w-100" id="bankService" name="bankService" required>
-                        <option value="">Choose bank service</option>
-                        <option value="Individual-Banking">Individual Banking</option>
-                        <option value="Business-Banking">Business Banking</option>
-                        <option value="Digital-Banking">Digital Banking</option>
-                        <option value="Premier-Banking">Premier Banking</option>
-                      </select>
+                      <div class="custom-dropdown" data-name="bankService" data-required="true">
+                        <div class="custom-dropdown-selected placeholder" tabindex="0">
+                          <span>Choose bank service</span>
+                          <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                        </div>
+                        <div class="custom-dropdown-options">
+                          <div class="custom-dropdown-option" data-value="Individual-Banking">Individual Banking</div>
+                          <div class="custom-dropdown-option" data-value="Business-Banking">Business Banking</div>
+                          <div class="custom-dropdown-option" data-value="Digital-Banking">Digital Banking</div>
+                          <div class="custom-dropdown-option" data-value="Premier-Banking">Premier Banking</div>
+                        </div>
+                      </div>
+                      <input type="hidden" id="bankService" name="bankService" required />
                     </div>
                     <div class="col-md-6">
                       <label class="label required-field" for="loanAmount">Loan Amount</label>
@@ -574,18 +726,24 @@
                     </div>
                     <div class="col-md-6">
                       <label class="label required-field" for="loanPurpose">Loan Purpose</label>
-                      <select class="w-100" id="loanPurpose" name="loanPurpose" required>
-                        <option value="">Select purpose</option>
-                        <option value="debt-consolidation">Debt Consolidation</option>
-                        <option value="home-improvement">Home Improvement</option>
-                        <option value="major-purchase">Major Purchase</option>
-                        <option value="medical-expenses">Medical Expenses</option>
-                        <option value="vacation">Vacation</option>
-                        <option value="wedding">Wedding</option>
-                        <option value="education">Education</option>
-                        <option value="business-expansion">Business Expansion</option>
-                        <option value="other">Other</option>
-                      </select>
+                      <div class="custom-dropdown" data-name="loanPurpose" data-required="true">
+                        <div class="custom-dropdown-selected placeholder" tabindex="0">
+                          <span>Select purpose</span>
+                          <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                        </div>
+                        <div class="custom-dropdown-options">
+                          <div class="custom-dropdown-option" data-value="debt-consolidation">Debt Consolidation</div>
+                          <div class="custom-dropdown-option" data-value="home-improvement">Home Improvement</div>
+                          <div class="custom-dropdown-option" data-value="major-purchase">Major Purchase</div>
+                          <div class="custom-dropdown-option" data-value="medical-expenses">Medical Expenses</div>
+                          <div class="custom-dropdown-option" data-value="vacation">Vacation</div>
+                          <div class="custom-dropdown-option" data-value="wedding">Wedding</div>
+                          <div class="custom-dropdown-option" data-value="education">Education</div>
+                          <div class="custom-dropdown-option" data-value="business-expansion">Business Expansion</div>
+                          <div class="custom-dropdown-option" data-value="other">Other</div>
+                        </div>
+                      </div>
+                      <input type="hidden" id="loanPurpose" name="loanPurpose" required />
                     </div>
                     <div class="col-md-12">
                       <label class="label required-field mb-4">Loan Duration</label>
@@ -640,23 +798,36 @@
                       <div class="row gy-4">
                         <div class="col-md-6">
                           <label class="label" for="personalLoanReason">Reason for Personal Loan</label>
-                          <select class="w-100" id="personalLoanReason" name="personalLoanReason">
-                            <option value="">Select reason</option>
-                            <option value="debt-consolidation">Debt Consolidation</option>
-                            <option value="home-improvement">Home Improvement</option>
-                            <option value="medical-expenses">Medical Expenses</option>
-                            <option value="vacation">Vacation/Travel</option>
-                            <option value="wedding">Wedding</option>
-                            <option value="education">Education</option>
-                            <option value="other">Other</option>
-                          </select>
+                          <div class="custom-dropdown" data-name="personalLoanReason">
+                            <div class="custom-dropdown-selected placeholder" tabindex="0">
+                              <span>Select reason</span>
+                              <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                            </div>
+                            <div class="custom-dropdown-options">
+                              <div class="custom-dropdown-option" data-value="debt-consolidation">Debt Consolidation</div>
+                              <div class="custom-dropdown-option" data-value="home-improvement">Home Improvement</div>
+                              <div class="custom-dropdown-option" data-value="medical-expenses">Medical Expenses</div>
+                              <div class="custom-dropdown-option" data-value="vacation">Vacation/Travel</div>
+                              <div class="custom-dropdown-option" data-value="wedding">Wedding</div>
+                              <div class="custom-dropdown-option" data-value="education">Education</div>
+                              <div class="custom-dropdown-option" data-value="other">Other</div>
+                            </div>
+                          </div>
+                          <input type="hidden" id="personalLoanReason" name="personalLoanReason" />
                         </div>
                         <div class="col-md-6">
                           <label class="label" for="personalLoanUnsecured">Loan Type</label>
-                          <select class="w-100" id="personalLoanUnsecured" name="personalLoanUnsecured">
-                            <option value="unsecured">Unsecured Personal Loan</option>
-                            <option value="secured">Secured Personal Loan</option>
-                          </select>
+                          <div class="custom-dropdown" data-name="personalLoanUnsecured">
+                            <div class="custom-dropdown-selected" tabindex="0">
+                              <span>Unsecured Personal Loan</span>
+                              <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                            </div>
+                            <div class="custom-dropdown-options">
+                              <div class="custom-dropdown-option selected" data-value="unsecured">Unsecured Personal Loan</div>
+                              <div class="custom-dropdown-option" data-value="secured">Secured Personal Loan</div>
+                            </div>
+                          </div>
+                          <input type="hidden" id="personalLoanUnsecured" name="personalLoanUnsecured" value="unsecured" />
                         </div>
                       </div>
                     </div>
@@ -667,13 +838,19 @@
                       <div class="row gy-4">
                         <div class="col-md-6">
                           <label class="label required-field" for="propertyType">Property Type</label>
-                          <select class="w-100" id="propertyType" name="propertyType">
-                            <option value="">Select property type</option>
-                            <option value="single-family">Single Family Home</option>
-                            <option value="condo">Condominium</option>
-                            <option value="townhouse">Townhouse</option>
-                            <option value="multi-family">Multi-Family</option>
-                          </select>
+                          <div class="custom-dropdown" data-name="propertyType" data-required="true">
+                            <div class="custom-dropdown-selected placeholder" tabindex="0">
+                              <span>Select property type</span>
+                              <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                            </div>
+                            <div class="custom-dropdown-options">
+                              <div class="custom-dropdown-option" data-value="single-family">Single Family Home</div>
+                              <div class="custom-dropdown-option" data-value="condo">Condominium</div>
+                              <div class="custom-dropdown-option" data-value="townhouse">Townhouse</div>
+                              <div class="custom-dropdown-option" data-value="multi-family">Multi-Family</div>
+                            </div>
+                          </div>
+                          <input type="hidden" id="propertyType" name="propertyType" />
                         </div>
                         <div class="col-md-6">
                           <label class="label required-field" for="propertyValue">Estimated Property Value</label>
@@ -691,12 +868,18 @@
                         </div>
                         <div class="col-md-6">
                           <label class="label required-field" for="propertyUse">Property Use</label>
-                          <select class="w-100" id="propertyUse" name="propertyUse">
-                            <option value="">Select use</option>
-                            <option value="primary">Primary Residence</option>
-                            <option value="secondary">Secondary/Vacation Home</option>
-                            <option value="investment">Investment Property</option>
-                          </select>
+                          <div class="custom-dropdown" data-name="propertyUse" data-required="true">
+                            <div class="custom-dropdown-selected placeholder" tabindex="0">
+                              <span>Select use</span>
+                              <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                            </div>
+                            <div class="custom-dropdown-options">
+                              <div class="custom-dropdown-option" data-value="primary">Primary Residence</div>
+                              <div class="custom-dropdown-option" data-value="secondary">Secondary/Vacation Home</div>
+                              <div class="custom-dropdown-option" data-value="investment">Investment Property</div>
+                            </div>
+                          </div>
+                          <input type="hidden" id="propertyUse" name="propertyUse" />
                         </div>
                       </div>
                     </div>
@@ -711,23 +894,35 @@
                         </div>
                         <div class="col-md-6">
                           <label class="label required-field" for="businessType">Business Type</label>
-                          <select class="w-100" id="businessType" name="businessType">
-                            <option value="">Select business type</option>
-                            <option value="sole-proprietorship">Sole Proprietorship</option>
-                            <option value="partnership">Partnership</option>
-                            <option value="llc">LLC</option>
-                            <option value="corporation">Corporation</option>
-                          </select>
+                          <div class="custom-dropdown" data-name="businessType" data-required="true">
+                            <div class="custom-dropdown-selected placeholder" tabindex="0">
+                              <span>Select business type</span>
+                              <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                            </div>
+                            <div class="custom-dropdown-options">
+                              <div class="custom-dropdown-option" data-value="sole-proprietorship">Sole Proprietorship</div>
+                              <div class="custom-dropdown-option" data-value="partnership">Partnership</div>
+                              <div class="custom-dropdown-option" data-value="llc">LLC</div>
+                              <div class="custom-dropdown-option" data-value="corporation">Corporation</div>
+                            </div>
+                          </div>
+                          <input type="hidden" id="businessType" name="businessType" />
                         </div>
                         <div class="col-md-6">
                           <label class="label required-field" for="businessAge">Years in Business</label>
-                          <select class="w-100" id="businessAge" name="businessAge">
-                            <option value="">Select duration</option>
-                            <option value="less-than-1">Less than 1 year</option>
-                            <option value="1-2">1-2 years</option>
-                            <option value="3-5">3-5 years</option>
-                            <option value="more-than-5">More than 5 years</option>
-                          </select>
+                          <div class="custom-dropdown" data-name="businessAge" data-required="true">
+                            <div class="custom-dropdown-selected placeholder" tabindex="0">
+                              <span>Select duration</span>
+                              <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                            </div>
+                            <div class="custom-dropdown-options">
+                              <div class="custom-dropdown-option" data-value="less-than-1">Less than 1 year</div>
+                              <div class="custom-dropdown-option" data-value="1-2">1-2 years</div>
+                              <div class="custom-dropdown-option" data-value="3-5">3-5 years</div>
+                              <div class="custom-dropdown-option" data-value="more-than-5">More than 5 years</div>
+                            </div>
+                          </div>
+                          <input type="hidden" id="businessAge" name="businessAge" />
                         </div>
                         <div class="col-md-6">
                           <label class="label required-field" for="annualRevenue">Annual Business Revenue</label>
@@ -745,12 +940,18 @@
                       <div class="row gy-4">
                         <div class="col-md-6">
                           <label class="label required-field" for="vehicleType">Vehicle Type</label>
-                          <select class="w-100" id="vehicleType" name="vehicleType">
-                            <option value="">Select vehicle type</option>
-                            <option value="new">New Vehicle</option>
-                            <option value="used">Used Vehicle</option>
-                            <option value="certified-pre-owned">Certified Pre-Owned</option>
-                          </select>
+                          <div class="custom-dropdown" data-name="vehicleType" data-required="true">
+                            <div class="custom-dropdown-selected placeholder" tabindex="0">
+                              <span>Select vehicle type</span>
+                              <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                            </div>
+                            <div class="custom-dropdown-options">
+                              <div class="custom-dropdown-option" data-value="new">New Vehicle</div>
+                              <div class="custom-dropdown-option" data-value="used">Used Vehicle</div>
+                              <div class="custom-dropdown-option" data-value="certified-pre-owned">Certified Pre-Owned</div>
+                            </div>
+                          </div>
+                          <input type="hidden" id="vehicleType" name="vehicleType" />
                         </div>
                         <div class="col-md-6">
                           <label class="label required-field" for="vehiclePrice">Vehicle Price</label>
@@ -819,47 +1020,117 @@
                   <!-- Address Information -->
                   <hr class="my-4">
                   <h5 class="mb-3">Current Address</h5>
-                  <div class="row gy-4">
-                    <div class="col-md-8">
-                      <label class="label required-field" for="currentAddress">Street Address</label>
-                      <input class="form-control" id="currentAddress" name="currentAddress" type="text" required />
+                  
+                  <!-- Address Template Selector -->
+                  <div class="address-template-selector">
+                    <h6 class="mb-3"><i class="fas fa-map-marker-alt"></i> Address Selection</h6>
+                    <div class="address-template-option">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="addressType" id="templateAddress" value="template" checked>
+                        <label class="form-check-label" for="templateAddress">
+                          <strong>Select from Common Addresses</strong>
+                        </label>
+                      </div>
+                      <div class="mt-2" id="templateSelector">
+                        <div class="custom-dropdown" data-name="addressTemplate">
+                          <div class="custom-dropdown-selected placeholder" tabindex="0">
+                            <span>Choose a template address</span>
+                            <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                          </div>
+                          <div class="custom-dropdown-options">
+                            <div class="custom-dropdown-option" data-value="london-downtown">
+                              <strong>London Downtown</strong><br>
+                              <small>123 Oxford Street, London, UK W1C 1JN</small>
+                            </div>
+                            <div class="custom-dropdown-option" data-value="london-residential">
+                              <strong>London Residential</strong><br>
+                              <small>456 Baker Street, London, UK NW1 6XE</small>
+                            </div>
+                            <div class="custom-dropdown-option" data-value="manchester-city">
+                              <strong>Manchester City Centre</strong><br>
+                              <small>789 Deansgate, Manchester, UK M3 2BW</small>
+                            </div>
+                            <div class="custom-dropdown-option" data-value="birmingham-central">
+                              <strong>Birmingham Central</strong><br>
+                              <small>321 Bull Street, Birmingham, UK B4 6AD</small>
+                            </div>
+                            <div class="custom-dropdown-option" data-value="edinburgh-royal">
+                              <strong>Edinburgh Royal Mile</strong><br>
+                              <small>654 Royal Mile, Edinburgh, UK EH1 1RE</small>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="address-preview" id="addressPreview" style="display: none;">
+                          <div id="previewContent"></div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-md-4">
-                      <label class="label" for="currentAptUnit">Apt/Unit/Suite</label>
-                      <input class="form-control" id="currentAptUnit" name="currentAptUnit" type="text" />
+                    <div class="address-template-option">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="addressType" id="manualAddress" value="manual">
+                        <label class="form-check-label" for="manualAddress">
+                          <strong>Enter Address Manually</strong>
+                        </label>
+                      </div>
                     </div>
-                    <div class="col-md-6">
-                      <label class="label required-field" for="currentCity">City</label>
-                      <input class="form-control" id="currentCity" name="currentCity" type="text" required />
-                    </div>
-                    <div class="col-md-3">
-                      <label class="label required-field" for="currentState">State/Province</label>
-                      <input class="form-control" id="currentState" name="currentState" type="text" required />
-                    </div>
-                    <div class="col-md-3">
-                      <label class="label required-field" for="currentZipCode">ZIP/Postal Code</label>
-                      <input class="form-control" id="currentZipCode" name="currentZipCode" type="text" required />
-                    </div>
-                    <div class="col-md-6">
-                      <label class="label required-field" for="currentCountry">Country</label>
-                      <select class="w-100" id="currentCountry" name="currentCountry" required>
-                        <option value="">Select country</option>
-                        <option value="US">United States</option>
-                        <option value="UK">United Kingdom</option>
-                        <option value="CA">Canada</option>
-                        <option value="AU">Australia</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-                    <div class="col-md-6">
-                      <label class="label required-field" for="housingStatus">Housing Status</label>
-                      <select class="w-100" id="housingStatus" name="housingStatus" required>
-                        <option value="">Select status</option>
-                        <option value="own">Own</option>
-                        <option value="rent">Rent</option>
-                        <option value="mortgage">Mortgage</option>
-                        <option value="live-with-family">Live with Family</option>
-                      </select>
+                  </div>
+                  
+                  <!-- Address Fields -->
+                  <div class="address-fields template-selected" id="addressFields">
+                    <div class="row gy-4">
+                      <div class="col-md-8">
+                        <label class="label required-field" for="currentAddress">Street Address</label>
+                        <input class="form-control" id="currentAddress" name="currentAddress" type="text" required />
+                      </div>
+                      <div class="col-md-4">
+                        <label class="label" for="currentAptUnit">Apt/Unit/Suite</label>
+                        <input class="form-control" id="currentAptUnit" name="currentAptUnit" type="text" />
+                      </div>
+                      <div class="col-md-6">
+                        <label class="label required-field" for="currentCity">City</label>
+                        <input class="form-control" id="currentCity" name="currentCity" type="text" required />
+                      </div>
+                      <div class="col-md-3">
+                        <label class="label required-field" for="currentState">State/Province</label>
+                        <input class="form-control" id="currentState" name="currentState" type="text" required />
+                      </div>
+                      <div class="col-md-3">
+                        <label class="label required-field" for="currentZipCode">ZIP/Postal Code</label>
+                        <input class="form-control" id="currentZipCode" name="currentZipCode" type="text" required />
+                      </div>
+                      <div class="col-md-6">
+                        <label class="label required-field" for="currentCountry">Country</label>
+                        <div class="custom-dropdown" data-name="currentCountry" data-required="true">
+                          <div class="custom-dropdown-selected placeholder" tabindex="0">
+                            <span>Select country</span>
+                            <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                          </div>
+                          <div class="custom-dropdown-options">
+                            <div class="custom-dropdown-option" data-value="US">United States</div>
+                            <div class="custom-dropdown-option" data-value="UK">United Kingdom</div>
+                            <div class="custom-dropdown-option" data-value="CA">Canada</div>
+                            <div class="custom-dropdown-option" data-value="AU">Australia</div>
+                            <div class="custom-dropdown-option" data-value="other">Other</div>
+                          </div>
+                        </div>
+                        <input type="hidden" id="currentCountry" name="currentCountry" required />
+                      </div>
+                      <div class="col-md-6">
+                        <label class="label required-field" for="housingStatus">Housing Status</label>
+                        <div class="custom-dropdown" data-name="housingStatus" data-required="true">
+                          <div class="custom-dropdown-selected placeholder" tabindex="0">
+                            <span>Select status</span>
+                            <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                          </div>
+                          <div class="custom-dropdown-options">
+                            <div class="custom-dropdown-option" data-value="own">Own</div>
+                            <div class="custom-dropdown-option" data-value="rent">Rent</div>
+                            <div class="custom-dropdown-option" data-value="mortgage">Mortgage</div>
+                            <div class="custom-dropdown-option" data-value="live-with-family">Live with Family</div>
+                          </div>
+                        </div>
+                        <input type="hidden" id="housingStatus" name="housingStatus" required />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -873,13 +1144,19 @@
                   <div class="row gy-4 mb-4">
                     <div class="col-md-6">
                       <label class="label required-field" for="employmentStatus">Employment Status</label>
-                      <select class="w-100" id="employmentStatus" name="employmentStatus" required>
-                        <option value="">Select status</option>
-                        <option value="employed-full-time">Employed Full-Time</option>
-                        <option value="employed-part-time">Employed Part-Time</option>
-                        <option value="self-employed">Self-Employed</option>
-                        <option value="retired">Retired</option>
-                      </select>
+                      <div class="custom-dropdown" data-name="employmentStatus" data-required="true">
+                        <div class="custom-dropdown-selected placeholder" tabindex="0">
+                          <span>Select status</span>
+                          <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                        </div>
+                        <div class="custom-dropdown-options">
+                          <div class="custom-dropdown-option" data-value="employed-full-time">Employed Full-Time</div>
+                          <div class="custom-dropdown-option" data-value="employed-part-time">Employed Part-Time</div>
+                          <div class="custom-dropdown-option" data-value="self-employed">Self-Employed</div>
+                          <div class="custom-dropdown-option" data-value="retired">Retired</div>
+                        </div>
+                      </div>
+                      <input type="hidden" id="employmentStatus" name="employmentStatus" required />
                     </div>
                     <div class="col-md-6">
                       <label class="label required-field" for="occupation">Occupation</label>
@@ -904,14 +1181,20 @@
                   <div class="row gy-4">
                     <div class="col-md-6">
                       <label class="label" for="creditScore">Credit Score (if known)</label>
-                      <select class="w-100" id="creditScore" name="creditScore">
-                        <option value="">Select range</option>
-                        <option value="excellent">Excellent (750+)</option>
-                        <option value="good">Good (650-749)</option>
-                        <option value="fair">Fair (550-649)</option>
-                        <option value="poor">Poor (below 550)</option>
-                        <option value="unknown">Don't know</option>
-                      </select>
+                      <div class="custom-dropdown" data-name="creditScore">
+                        <div class="custom-dropdown-selected placeholder" tabindex="0">
+                          <span>Select range</span>
+                          <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                        </div>
+                        <div class="custom-dropdown-options">
+                          <div class="custom-dropdown-option" data-value="excellent">Excellent (750+)</div>
+                          <div class="custom-dropdown-option" data-value="good">Good (650-749)</div>
+                          <div class="custom-dropdown-option" data-value="fair">Fair (550-649)</div>
+                          <div class="custom-dropdown-option" data-value="poor">Poor (below 550)</div>
+                          <div class="custom-dropdown-option" data-value="unknown">Don't know</div>
+                        </div>
+                      </div>
+                      <input type="hidden" id="creditScore" name="creditScore" />
                     </div>
                     <div class="col-md-6">
                       <label class="label" for="existingDebts">Total Existing Debt</label>
@@ -929,11 +1212,18 @@
                     </div>
                     <div class="col-md-6">
                       <label class="label" for="bankruptcyHistory">Bankruptcy History</label>
-                      <select class="w-100" id="bankruptcyHistory" name="bankruptcyHistory">
-                        <option value="never">Never</option>
-                        <option value="within-7-years">Within last 7 years</option>
-                        <option value="over-7-years">Over 7 years ago</option>
-                      </select>
+                      <div class="custom-dropdown" data-name="bankruptcyHistory">
+                        <div class="custom-dropdown-selected" tabindex="0">
+                          <span>Never</span>
+                          <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                        </div>
+                        <div class="custom-dropdown-options">
+                          <div class="custom-dropdown-option selected" data-value="never">Never</div>
+                          <div class="custom-dropdown-option" data-value="within-7-years">Within last 7 years</div>
+                          <div class="custom-dropdown-option" data-value="over-7-years">Over 7 years ago</div>
+                        </div>
+                      </div>
+                      <input type="hidden" id="bankruptcyHistory" name="bankruptcyHistory" value="never" />
                     </div>
                   </div>
                 </div>
@@ -1016,13 +1306,19 @@
 
                     <div class="col-12">
                       <label class="label required-field">Source of funds for this loan:</label>
-                      <select class="w-100" name="sourceOfFunds" required>
-                        <option value="">Select source</option>
-                        <option value="salary">Salary/Employment Income</option>
-                        <option value="business">Business Income</option>
-                        <option value="savings">Personal Savings</option>
-                        <option value="other">Other</option>
-                      </select>
+                      <div class="custom-dropdown" data-name="sourceOfFunds" data-required="true">
+                        <div class="custom-dropdown-selected placeholder" tabindex="0">
+                          <span>Select source</span>
+                          <i class="fas fa-chevron-down custom-dropdown-arrow"></i>
+                        </div>
+                        <div class="custom-dropdown-options">
+                          <div class="custom-dropdown-option" data-value="salary">Salary/Employment Income</div>
+                          <div class="custom-dropdown-option" data-value="business">Business Income</div>
+                          <div class="custom-dropdown-option" data-value="savings">Personal Savings</div>
+                          <div class="custom-dropdown-option" data-value="other">Other</div>
+                        </div>
+                      </div>
+                      <input type="hidden" name="sourceOfFunds" required />
                     </div>
                   </div>
 
@@ -1348,15 +1644,216 @@
       $('#currentStepText').text(currentStep);
     }
 
-    // Enhanced form functionality
-    $(document).ready(function() {
-      // Set current date for signature
-      const today = new Date().toISOString().split('T')[0];
-      $('#signatureDate').val(today);
-      $('#signatureDateDraw').val(today);
+          // Custom dropdown functionality
+      function initCustomDropdowns() {
+        // Remove existing event handlers to prevent duplicates
+        $('.custom-dropdown').off('click keydown');
+        $('.custom-dropdown .custom-dropdown-option').off('click');
+        
+        $('.custom-dropdown').each(function() {
+          const dropdown = $(this);
+          const selected = dropdown.find('.custom-dropdown-selected');
+          const options = dropdown.find('.custom-dropdown-options');
+          let hiddenInput = dropdown.siblings('input[type="hidden"]');
+          
+          // If no sibling hidden input, look for one in parent or create one
+          if (hiddenInput.length === 0) {
+            hiddenInput = dropdown.parent().find('input[type="hidden"]');
+          }
+          if (hiddenInput.length === 0) {
+            const name = dropdown.data('name');
+            const isRequired = dropdown.data('required') === true || dropdown.data('required') === 'true';
+            hiddenInput = $(`<input type="hidden" name="${name}" ${isRequired ? 'required' : ''} />`);
+            dropdown.after(hiddenInput);
+          }
+          
+          const name = dropdown.data('name');
+          
+          // Set initial value if already selected
+          const initialOption = dropdown.find('.custom-dropdown-option.selected');
+          if (initialOption.length) {
+            const value = initialOption.data('value');
+            const text = initialOption.text();
+            selected.find('span').text(text);
+            selected.removeClass('placeholder');
+            hiddenInput.val(value);
+          }
+          
+          // Toggle dropdown
+          selected.on('click.customDropdown', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            // Close other dropdowns
+            $('.custom-dropdown').not(dropdown).removeClass('open');
+            dropdown.toggleClass('open');
+          });
+          
+          // Select option
+          dropdown.find('.custom-dropdown-option').on('click.customDropdown', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const option = $(this);
+            const value = option.data('value');
+            const text = option.text(); // Use text() instead of html() to avoid HTML issues
+            
+            // Update selected display
+            selected.find('span').text(text);
+            selected.removeClass('placeholder');
+            
+            // Update hidden input
+            hiddenInput.val(value);
+            
+            // Update selected option
+            dropdown.find('.custom-dropdown-option').removeClass('selected');
+            option.addClass('selected');
+            
+            // Close dropdown
+            dropdown.removeClass('open');
+            
+            // Trigger change event for validation
+            hiddenInput.trigger('change');
+            
+            // Debug log
+            console.log(`Dropdown ${name} selected: ${value} = ${text}`);
+          });
+          
+          // Keyboard navigation
+          selected.on('keydown.customDropdown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              selected.trigger('click.customDropdown');
+            }
+          });
+        });
+        
+        // Close dropdowns when clicking outside (remove previous handler first)
+        $(document).off('click.customDropdown').on('click.customDropdown', function(e) {
+          if (!$(e.target).closest('.custom-dropdown').length) {
+            $('.custom-dropdown').removeClass('open');
+          }
+        });
+      }
+      
+      // Address template functionality
+      function initAddressTemplates() {
+        const addressTemplates = {
+          'london-downtown': {
+            street: '123 Oxford Street',
+            city: 'London',
+            state: 'England',
+            zip: 'W1C 1JN',
+            country: 'UK'
+          },
+          'london-residential': {
+            street: '456 Baker Street',
+            city: 'London', 
+            state: 'England',
+            zip: 'NW1 6XE',
+            country: 'UK'
+          },
+          'manchester-city': {
+            street: '789 Deansgate',
+            city: 'Manchester',
+            state: 'England', 
+            zip: 'M3 2BW',
+            country: 'UK'
+          },
+          'birmingham-central': {
+            street: '321 Bull Street',
+            city: 'Birmingham',
+            state: 'England',
+            zip: 'B4 6AD', 
+            country: 'UK'
+          },
+          'edinburgh-royal': {
+            street: '654 Royal Mile',
+            city: 'Edinburgh',
+            state: 'Scotland',
+            zip: 'EH1 1RE',
+            country: 'UK'
+          }
+        };
+        
+        // Handle address type selection 
+        $('input[name="addressType"]').on('change', function() {
+          const addressFields = $('#addressFields');
+          if ($(this).val() === 'manual') {
+            addressFields.removeClass('template-selected').addClass('manual-entry');
+            $('#templateSelector').hide();
+            $('#addressPreview').hide();
+            // Clear template values
+            clearAddressFields();
+          } else {
+            addressFields.removeClass('manual-entry').addClass('template-selected');
+            $('#templateSelector').show();
+          }
+        });
+        
+        // Handle template selection - use document delegation to work with dynamically initialized dropdowns
+        $(document).off('click.addressTemplate').on('click.addressTemplate', '[data-name="addressTemplate"] .custom-dropdown-option', function() {
+          const templateKey = $(this).data('value');
+          const template = addressTemplates[templateKey];
+          
+          if (template) {
+            // Fill address fields
+            $('#currentAddress').val(template.street);
+            $('#currentCity').val(template.city);
+            $('#currentState').val(template.state);
+            $('#currentZipCode').val(template.zip);
+            
+            // Update country dropdown
+            const countryDropdown = $('[data-name="currentCountry"]');
+            const countryOption = countryDropdown.find(`[data-value="${template.country}"]`);
+            if (countryOption.length) {
+              // Trigger the custom dropdown selection
+              countryOption.trigger('click.customDropdown');
+            }
+            
+            // Show preview
+            const previewContent = `
+              <strong>Selected Address:</strong><br>
+              ${template.street}<br>
+              ${template.city}, ${template.state} ${template.zip}<br>
+              ${template.country}
+            `;
+            $('#previewContent').html(previewContent);
+            $('#addressPreview').show();
+          }
+        });
+        
+        function clearAddressFields() {
+          $('#currentAddress').val('');
+          $('#currentCity').val('');
+          $('#currentState').val('');
+          $('#currentZipCode').val('');
+          $('#currentAptUnit').val('');
+          
+          // Reset country dropdown
+          const countryDropdown = $('[data-name="currentCountry"]');
+          countryDropdown.find('.custom-dropdown-selected').addClass('placeholder').find('span').text('Select country');
+          countryDropdown.find('.custom-dropdown-option').removeClass('selected');
+          countryDropdown.siblings('input[type="hidden"]').val('');
+        }
+      }
 
-      // Initialize first step
-      showStep(1);
+      // Enhanced form functionality
+      $(document).ready(function() {
+              // Set current date for signature
+        const today = new Date().toISOString().split('T')[0];
+        $('#signatureDate').val(today);
+        $('#signatureDateDraw').val(today);
+
+        // Initialize custom components
+        try {
+          initCustomDropdowns();
+          initAddressTemplates();
+          console.log('Custom dropdowns and address templates initialized successfully');
+        } catch (error) {
+          console.error('Error initializing custom components:', error);
+        }
+
+        // Initialize first step
+        showStep(1);
 
       // Loan type change handler
       $('input[name="select-loan-type"]').on('change', function() {
@@ -1553,26 +2050,124 @@
         // Show the container
         $('#loanSpecificFields').show();
         
+        let targetSection = null;
+        
         // Show specific section based on loan type
         switch(loanType) {
           case 'Personal_loan':
-            $('#personalLoanFields').show();
+            targetSection = $('#personalLoanFields');
+            targetSection.show();
             break;
           case 'Home_loan':
-            $('#homeLoanFields').show();
+            targetSection = $('#homeLoanFields');
+            targetSection.show();
             // Make home loan fields required
             $('#propertyType, #propertyValue, #downPayment, #propertyUse').prop('required', true);
             break;
           case 'Business_loan':
-            $('#businessLoanFields').show();
+            targetSection = $('#businessLoanFields');
+            targetSection.show();
             // Make business loan fields required
             $('#businessName, #businessType, #businessAge, #annualRevenue').prop('required', true);
             break;
           case 'Car_loan':
-            $('#carLoanFields').show();
+            targetSection = $('#carLoanFields');
+            targetSection.show();
             // Make car loan fields required
             $('#vehicleType, #vehiclePrice').prop('required', true);
             break;
+        }
+        
+        // Initialize dropdowns specifically for the newly shown section
+        if (targetSection && targetSection.length) {
+          setTimeout(() => {
+            console.log('Initializing dropdowns for section:', targetSection.attr('id'));
+            
+            // Initialize only dropdowns in the target section
+            targetSection.find('.custom-dropdown').each(function() {
+              const dropdown = $(this);
+              const selected = dropdown.find('.custom-dropdown-selected');
+              const options = dropdown.find('.custom-dropdown-options');
+              let hiddenInput = dropdown.siblings('input[type="hidden"]');
+              
+              // If no sibling hidden input, look for one in parent or create one
+              if (hiddenInput.length === 0) {
+                hiddenInput = dropdown.parent().find('input[type="hidden"]');
+              }
+              if (hiddenInput.length === 0) {
+                const name = dropdown.data('name');
+                const isRequired = dropdown.data('required') === true || dropdown.data('required') === 'true';
+                hiddenInput = $(`<input type="hidden" name="${name}" ${isRequired ? 'required' : ''} />`);
+                dropdown.after(hiddenInput);
+              }
+              
+              const name = dropdown.data('name');
+              
+              // Remove existing handlers for this specific dropdown
+              selected.off('click.customDropdown keydown.customDropdown');
+              dropdown.find('.custom-dropdown-option').off('click.customDropdown');
+              
+              // Set initial value if already selected
+              const initialOption = dropdown.find('.custom-dropdown-option.selected');
+              if (initialOption.length) {
+                const value = initialOption.data('value');
+                const text = initialOption.text();
+                selected.find('span').text(text);
+                selected.removeClass('placeholder');
+                hiddenInput.val(value);
+              }
+              
+              // Toggle dropdown
+              selected.on('click.customDropdown', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                // Close other dropdowns
+                $('.custom-dropdown').not(dropdown).removeClass('open');
+                dropdown.toggleClass('open');
+                console.log('Clicked dropdown:', name, 'isOpen:', dropdown.hasClass('open'));
+              });
+              
+              // Select option
+              dropdown.find('.custom-dropdown-option').on('click.customDropdown', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const option = $(this);
+                const value = option.data('value');
+                const text = option.text();
+                
+                // Update selected display
+                selected.find('span').text(text);
+                selected.removeClass('placeholder');
+                
+                // Update hidden input
+                hiddenInput.val(value);
+                
+                // Update selected option
+                dropdown.find('.custom-dropdown-option').removeClass('selected');
+                option.addClass('selected');
+                
+                // Close dropdown
+                dropdown.removeClass('open');
+                
+                // Trigger change event for validation
+                hiddenInput.trigger('change');
+                
+                console.log(`Dropdown ${name} selected: ${value} = ${text}`);
+              });
+              
+              // Keyboard navigation
+              selected.on('keydown.customDropdown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  selected.trigger('click.customDropdown');
+                }
+              });
+              
+              console.log('Initialized dropdown:', name, 'with', dropdown.find('.custom-dropdown-option').length, 'options');
+            });
+            
+            console.log('Completed dropdown initialization for loan type:', loanType);
+          }, 100);
         }
       }
 
@@ -1718,6 +2313,96 @@
         
 
       }
+
+      // Debug function to test dropdowns (can be called from browser console)
+      window.debugDropdowns = function() {
+        console.log('=== DROPDOWN DEBUG INFO ===');
+        console.log('Total custom dropdowns found:', $('.custom-dropdown').length);
+        
+        $('.custom-dropdown').each(function(index) {
+          const dropdown = $(this);
+          const name = dropdown.data('name');
+          const selected = dropdown.find('.custom-dropdown-selected');
+          const options = dropdown.find('.custom-dropdown-option');
+          const hiddenInput = dropdown.siblings('input[type="hidden"]').add(dropdown.parent().find('input[type="hidden"]'));
+          
+          console.log(`Dropdown ${index + 1}:`, {
+            name: name,
+            hasSelected: selected.length > 0,
+            optionsCount: options.length,
+            hasHiddenInput: hiddenInput.length > 0,
+            hiddenInputValue: hiddenInput.val(),
+            isVisible: dropdown.is(':visible'),
+            element: dropdown[0]
+          });
+        });
+        
+        // Test click on first visible dropdown
+        const firstDropdown = $('.custom-dropdown:visible').first();
+        if (firstDropdown.length) {
+          console.log('Testing first visible dropdown click...');
+          firstDropdown.find('.custom-dropdown-selected').trigger('click');
+        }
+      };
+
+      // Force reinitialize function
+      window.forceReinitDropdowns = function() {
+        console.log('Force reinitializing all dropdowns...');
+        initCustomDropdowns();
+        console.log('Reinitialization complete');
+      };
+
+      // Test specific loan type dropdowns
+      window.testLoanDropdowns = function(loanType = 'Personal_loan') {
+        console.log(`Testing ${loanType} dropdowns...`);
+        
+        // First select the loan type
+        const loanRadio = $(`#${loanType}`);
+        if (loanRadio.length) {
+          loanRadio.prop('checked', true).trigger('change');
+          console.log('Selected loan type:', loanType);
+          
+          // Wait for the section to show and dropdowns to initialize
+          setTimeout(() => {
+            const sectionMap = {
+              'Personal_loan': '#personalLoanFields',
+              'Business_loan': '#businessLoanFields',
+              'Home_loan': '#homeLoanFields',
+              'Car_loan': '#carLoanFields'
+            };
+            
+            const section = $(sectionMap[loanType]);
+            if (section.is(':visible')) {
+              console.log('Section is visible, checking dropdowns...');
+              const dropdowns = section.find('.custom-dropdown');
+              console.log('Found', dropdowns.length, 'dropdowns in section');
+              
+              dropdowns.each(function(index) {
+                const dropdown = $(this);
+                const name = dropdown.data('name');
+                const selected = dropdown.find('.custom-dropdown-selected');
+                const options = dropdown.find('.custom-dropdown-option');
+                
+                console.log(`Dropdown ${index + 1} (${name}):`, {
+                  hasClickHandler: selected.hasClass('has-click-handler'),
+                  optionsCount: options.length,
+                  isVisible: dropdown.is(':visible')
+                });
+                
+                // Test click on first dropdown
+                if (index === 0) {
+                  console.log('Testing click on first dropdown...');
+                  selected.trigger('click');
+                }
+              });
+            } else {
+              console.log('Section is not visible!');
+            }
+          }, 300);
+        } else {
+          console.log('Loan type radio button not found:', loanType);
+        }
+      };
 
     });
   </script>

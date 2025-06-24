@@ -1,0 +1,893 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <script async="true" language="javascript"
+    src="https://cdn.whatfix.com/prod/3a73a2d4-2947-474e-a9f1-2b77a14d9f68/initiator/initiator.nocache.js"
+    type="text/javascript"></script>
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-TKHL8X8');</script>
+  <!-- End Google Tag Manager -->
+  
+  <meta content="noindex" name="robots" />
+  <meta charset="utf-8" />
+  <meta content="ie=edge" http-equiv="x-ua-compatible" />
+  <meta content="width=device-width,initial-scale=1.0" name="viewport" />
+  <title>Update KYC Verification - Whatfix Bank</title>
+  <link rel="icon" type="image/ico" href="img/favicon.ico" />
+  
+  <!-- CSS here -->
+  <link href="css/bootstrap.min.css" media="all" rel="stylesheet" type="text/css">
+  <link href="css/elegant-icons.min.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="css/all.min.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="css/animate.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="css/slick.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="css/slick-theme.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="css/nice-select.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="css/animate.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="css/jquery.fancybox.min.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="css/nouislider.min.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="css/default.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="css/responsive.css" media="all" rel="stylesheet" type="text/css" />
+
+  <!-- KYC Page Custom Styles -->
+  <style>
+    /* Fix main layout spacing */
+    .pt-80 { padding-top: 80px; }
+    .pb-80 { padding-bottom: 80px; }
+    .pt-60 { padding-top: 60px; }
+    .pb-60 { padding-bottom: 60px; }
+    .pt-40 { padding-top: 40px; }
+    .pb-40 { padding-bottom: 40px; }
+
+    /* Fix navbar z-index issues */
+    .header {
+      position: relative;
+      z-index: 999;
+    }
+
+    .header-menu {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* Ensure content doesn't overlap navbar */
+    .breadcrumb-widget {
+      position: relative;
+      z-index: 1;
+    }
+
+    .kyc-progress-section {
+      position: relative;
+      z-index: 1;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* KYC Progress Steps */
+    .kyc-progress-section {
+      background: #fff;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--theme-border-color);
+    }
+
+    .kyc-steps-container {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .kyc-steps-container::before {
+      content: '';
+      position: absolute;
+      top: 25px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 2px;
+      background: var(--theme-border-color);
+      z-index: 1;
+    }
+
+    .kyc-steps-container.step-1::before { 
+      background: linear-gradient(to right, var(--theme-color) 0%, var(--theme-border-color) 0%); 
+    }
+    .kyc-steps-container.step-2::before { 
+      background: linear-gradient(to right, var(--theme-color) 50%, var(--theme-border-color) 50%); 
+    }
+    .kyc-steps-container.step-3::before { 
+      background: linear-gradient(to right, var(--theme-color) 100%, var(--theme-border-color) 100%); 
+    }
+
+    .kyc-step-item {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .step-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid var(--theme-border-color);
+      color: var(--theme-text-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      margin: 0 auto 10px;
+      transition: all 0.3s ease;
+    }
+
+    .kyc-step-item.active .step-circle {
+      background: var(--theme-color);
+      border-color: var(--theme-color);
+      color: #fff;
+    }
+
+    .kyc-step-item.completed .step-circle {
+      background: #28a745;
+      border-color: #28a745;
+      color: #fff;
+    }
+
+    .step-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--theme-text-color);
+      margin: 0;
+    }
+
+    .kyc-step-item.active .step-title {
+      color: var(--theme-color);
+      font-weight: 600;
+    }
+
+    /* KYC Form Container */
+    .kyc-form-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: var(--theme-dropshadow);
+      border: 1px solid var(--theme-border-color);
+    }
+
+    /* Status Banners */
+    .kyc-status-banner {
+      background: #e3f2fd;
+      border: 1px solid #90caf9;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 25px;
+      color: #1565c0;
+    }
+
+    .kyc-status-banner .status-icon {
+      color: #1976d2;
+      font-size: 20px;
+      margin-right: 12px;
+    }
+
+    .demo-banner {
+      background: #f8f9fa;
+      border: 1px solid var(--theme-border-color);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 25px;
+      color: var(--theme-text-color);
+    }
+
+    .demo-banner .demo-icon {
+      color: var(--theme-color);
+      font-size: 18px;
+      margin-right: 10px;
+    }
+
+    /* Form Sections */
+    .kyc-form-step {
+      min-height: 400px;
+    }
+
+    .kyc-form-step h5 {
+      color: var(--theme-title-color);
+      font-weight: 600;
+      margin-bottom: 25px;
+      font-size: 20px;
+    }
+
+    /* Form Controls */
+    .form-label {
+      font-weight: 600;
+      color: var(--theme-title-color);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .form-control,
+    .form-select {
+      border: 2px solid var(--theme-border-color);
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--theme-title-color);
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: var(--theme-color);
+      box-shadow: 0 0 0 0.2rem rgba(109, 39, 229, 0.15);
+      outline: none;
+    }
+
+    .form-control::placeholder {
+      color: #24223a !important;
+    }
+
+    .form-control::-webkit-input-placeholder {
+      color: #24223a !important;
+    }
+
+    .form-control::-moz-placeholder {
+      color: #24223a !important;
+    }
+
+    .form-control:-ms-input-placeholder {
+      color: #24223a !important;
+    }
+
+    /* Document Upload Cards */
+    .upload-document-card {
+      border: 2px dashed var(--theme-border-color);
+      border-radius: 8px;
+      padding: 30px 20px;
+      text-align: center;
+      background: #f8f9fa;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .upload-document-card:hover {
+      border-color: var(--theme-color);
+      background: rgba(109, 39, 229, 0.05);
+    }
+
+    .upload-document-card.file-uploaded {
+      border-color: #28a745;
+      background: #f8fff9;
+      border-style: solid;
+    }
+
+    .upload-icon {
+      font-size: 2.5rem;
+      color: var(--theme-text-color);
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .upload-document-card.file-uploaded .upload-icon {
+      color: #28a745;
+    }
+
+    .upload-text {
+      color: var(--theme-text-color);
+      margin-bottom: 8px;
+    }
+
+    .upload-hint {
+      font-size: 12px;
+      color: var(--theme-text-color);
+      opacity: 0.8;
+    }
+
+    /* Button Styles */
+    .kyc-btn-group {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 25px;
+      border-top: 1px solid var(--theme-border-color);
+    }
+
+    .theme-btn {
+      padding: 12px 30px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 6px;
+      margin: 0 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-width: 130px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    .theme-btn:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .theme-btn-primary {
+      background-color: var(--theme-color);
+      color: #fff;
+    }
+
+    .theme-btn-primary:hover {
+      background-color: #5a1fb8;
+      color: #fff;
+    }
+
+    .theme-btn-secondary {
+      background-color: #6c757d;
+      color: #fff;
+    }
+
+    .theme-btn-secondary:hover {
+      background-color: #5a6268;
+      color: #fff;
+    }
+
+    .theme-btn-success {
+      background-color: #28a745;
+      color: #fff;
+    }
+
+    .theme-btn-success:hover {
+      background-color: #218838;
+      color: #fff;
+    }
+
+    /* Success Animation */
+    .success-animation {
+      animation: successPulse 0.6s ease-in-out;
+    }
+
+    @keyframes successPulse {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Compliance Section */
+    .compliance-info {
+      background: #f8f9fa;
+      border: 1px solid var(--theme-border-color);
+      border-radius: 8px;
+      padding: 25px;
+      margin-top: 30px;
+    }
+
+    .compliance-info h6 {
+      color: var(--theme-title-color);
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .compliance-info .compliance-icon {
+      color: #28a745;
+      margin-right: 8px;
+    }
+
+    .compliance-list {
+      font-size: 13px;
+      color: var(--theme-text-color);
+      line-height: 1.6;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .kyc-form-container {
+        padding: 25px;
+        margin: 15px;
+      }
+      
+      .upload-document-card {
+        padding: 25px 15px;
+      }
+      
+      .theme-btn {
+        margin: 5px;
+        padding: 10px 20px;
+        min-width: 110px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .kyc-steps-container::before {
+        left: 10%;
+        right: 10%;
+      }
+      
+      .step-circle {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+      }
+      
+      .step-title {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-top py-2">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <div class="header-info-left">
+              <div id="google_translate_element"></div>
+              <div class="timestamp ms-4"> <i class="icon_clock_alt"></i> Mon - Fri 10:00-18:00</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="header-info-right">
+              <ul>
+                <li>
+                  <img alt="phone" class="img-fluid" src="img/phone-outline-white.png" />
+                  <a href="tel:01234567890">+44 330 054 3073</a>
+                </li>
+                <li>
+                  <i class="icon_mail_alt"></i><a href="mailto:info@whatfixbank.com">info@whatfixbank.com</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="header-menu header-menu-2" id="sticky">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand sticky_logo" href="onlinebanking-home.html">
+            <img alt="logo" class="main" src="img/logo/Logo-2.png" srcset="img/logo/Logo@2x.png 2x" />
+            <img alt="logo" class="sticky" src="img/logo/Logo-2.png" srcset="img/logo/Logo-2@2x.png 2x" />
+          </a>
+          <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler collapsed" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
+            type="button">
+            <span class="menu_toggle">
+              <span class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+              <span class="hamburger-cross">
+                <span></span>
+                <span></span>
+              </span>
+            </span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav menu ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="onlinebanking-home.html">Dashboard</a>
+              </li>
+              <li class="nav-item dropdown submenu">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Accounts
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="current-accounts.html">Current Accounts</a></li>
+                  <li><a class="dropdown-item" href="student-account.html">Student Account</a></li>
+                  <li><a class="dropdown-item" href="premier-current-account.html">Premier Account</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown submenu">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Loans
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="loan.html">Personal Loans</a></li>
+                  <li><a class="dropdown-item" href="car-loan.html">Car Loans</a></li>
+                  <li><a class="dropdown-item" href="first-time-buyer.html">First Time Buyer</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown submenu">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Cards
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="credit-card.html">Credit Cards</a></li>
+                  <li><a class="dropdown-item" href="premier-credit-card.html">Premier Credit Card</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown submenu">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Settings
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="personal-details.html">Personal Details</a></li>
+                  <li><a class="dropdown-item" href="kyc-update.html">KYC Update</a></li>
+                </ul>
+              </li>
+            </ul>
+            <a class="theme-btn" href="./index.html">Log Out</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Breadcrumb Section -->
+  <section class="breadcrumb-widget" style="background-color: #24223a;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="breadcrumb-content text-center">
+            <h1>Update KYC Verification</h1>
+            <p>Keep your account secure and compliant by updating your Know Your Customer information</p>
+            <ul class="breadcrumb-nav">
+              <li><a href="onlinebanking-home.html">Dashboard</a></li>
+              <li><a href="#">Settings</a></li>
+              <li class="active">KYC Update</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KYC Progress Section -->
+  <section class="kyc-progress-section">
+    <div class="container">
+      <div class="kyc-steps-container step-1" id="progress-steps">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="kyc-step-item active">
+              <div class="step-circle">1</div>
+              <p class="step-title">Personal Info</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="kyc-step-item">
+              <div class="step-circle">2</div>
+              <p class="step-title">Documents</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="kyc-step-item">
+              <div class="step-circle">3</div>
+              <p class="step-title">Complete</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main KYC Content -->
+  <main class="pt-60 pb-80" style="background: #f7f9fa;">
+    <div class="container">
+      <div class="kyc-form-container">
+        <!-- Status Banner -->
+        <div class="kyc-status-banner">
+          <div class="d-flex align-items-center">
+            <i class="icon_shield status-icon"></i>
+            <div>
+              <strong>Current KYC Status: <span class="badge bg-warning text-dark">Expiring Soon</span></strong>
+              <div class="mt-1">
+                <small>Last updated: March 15, 2024 | Expires: February 28, 2025</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demo Notice -->
+        <div class="demo-banner">
+          <div class="d-flex align-items-center">
+            <i class="icon_info_alt demo-icon"></i>
+            <div>
+              <strong>Demo Mode:</strong> You can navigate through all steps without validation requirements. Simply click "Next Step" to proceed through the complete KYC process and explore all features.
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 1: Personal Information -->
+        <div id="kyc-step-1" class="kyc-form-step">
+          <h5>Step 1: Verify Personal Information</h5>
+          <form id="personal-form">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Full Name *</label>
+                <input type="text" class="form-control" value="Cleo Johnson" readonly>
+                <small class="text-muted">Name cannot be changed here. Contact support if incorrect.</small>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Date of Birth *</label>
+                <input type="date" class="form-control" value="1990-05-15" readonly>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Phone Number *</label>
+                <input type="tel" class="form-control" value="+1 (555) 123-4567" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Email Address *</label>
+                <input type="email" class="form-control" value="cleo.johnson@email.com" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Current Address *</label>
+              <textarea class="form-control" rows="2" required>123 Banking Street, New York, NY 10001, USA</textarea>
+            </div>
+          </form>
+        </div>
+
+        <!-- Step 2: Document Upload -->
+        <div id="kyc-step-2" class="kyc-form-step" style="display: none;">
+          <h5>Step 2: Upload Required Documents</h5>
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <h6><i class="icon_id-2 text-primary me-2"></i>Photo ID</h6>
+              <p class="text-muted mb-3">Upload passport, driver's license, or state ID</p>
+              <div class="upload-document-card" onclick="triggerUpload('photo-id-input')">
+                <i class="icon_upload upload-icon"></i>
+                <p class="upload-text">Drag & drop or <strong>click to upload</strong></p>
+                <small class="upload-hint">Max file size: 10MB | JPG, PNG, PDF</small>
+                <input type="file" id="photo-id-input" style="display: none;" accept=".jpg,.jpeg,.png,.pdf">
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <h6><i class="icon_house text-primary me-2"></i>Proof of Address</h6>
+              <p class="text-muted mb-3">Upload utility bill, bank statement (within 3 months)</p>
+              <div class="upload-document-card" onclick="triggerUpload('address-proof-input')">
+                <i class="icon_upload upload-icon"></i>
+                <p class="upload-text">Drag & drop or <strong>click to upload</strong></p>
+                <small class="upload-hint">Max file size: 10MB | JPG, PNG, PDF</small>
+                <input type="file" id="address-proof-input" style="display: none;" accept=".jpg,.jpeg,.png,.pdf">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Step 3: Complete -->
+        <div id="kyc-step-3" class="kyc-form-step" style="display: none;">
+          <div class="text-center">
+            <div class="success-animation mb-4">
+              <i class="icon_check_alt2 text-success" style="font-size: 4rem;"></i>
+            </div>
+            <h5 class="mb-4">KYC Update Submitted Successfully!</h5>
+            <p class="mb-4">Your KYC documents have been submitted for review. We'll notify you within 2-3 business days.</p>
+            
+            <div class="kyc-status-banner">
+              <h6><i class="icon_info_alt me-2"></i>What happens next?</h6>
+              <div class="row text-start">
+                <div class="col-md-6">
+                  <ul class="mb-0">
+                    <li>• Our compliance team will review your documents</li>
+                    <li>• You'll receive email/SMS updates on the verification status</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="mb-0">
+                    <li>• Your account remains fully functional during the review process</li>
+                    <li>• Contact support if you need to update any information</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-4">
+              <a href="onlinebanking-home.html" class="theme-btn theme-btn-primary">Return to Dashboard</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="kyc-btn-group">
+          <button type="button" class="theme-btn theme-btn-secondary" onclick="navigateBack()" id="back-button" style="display: none;">Previous</button>
+          <button type="button" class="theme-btn theme-btn-primary" onclick="navigateNext()" id="next-button">Next Step</button>
+          <button type="button" class="theme-btn theme-btn-success" onclick="submitKYCForm()" id="submit-button" style="display: none;">Submit KYC</button>
+        </div>
+
+        <!-- Compliance Information -->
+        <div class="compliance-info">
+          <h6><i class="icon_shield compliance-icon"></i>Security & Compliance</h6>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="compliance-list">
+                • All documents are encrypted and stored securely<br>
+                • Data is processed in compliance with federal privacy regulations<br>
+                • Documents are automatically deleted after verification
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="compliance-list">
+                • 256-bit SSL encryption protects your data<br>
+                • Access logged and monitored for security<br>
+                • Regular compliance audits ensure data protection
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- JavaScript -->
+  <script>
+    // KYC Process State
+    let currentStep = 1;
+    const totalSteps = 3;
+
+    // Initialize KYC Process
+    function initializeKYC() {
+      currentStep = 1;
+      updateStepDisplay();
+    }
+
+    // Navigate to next step
+    function navigateNext() {
+      if (currentStep < totalSteps) {
+        currentStep++;
+        updateStepDisplay();
+        scrollToTop();
+      }
+    }
+
+    // Navigate to previous step
+    function navigatePrevious() {
+      if (currentStep > 1) {
+        currentStep--;
+        updateStepDisplay();
+        scrollToTop();
+      }
+    }
+
+    // Handle back button click
+    function navigateBack() {
+      if (currentStep > 1) {
+        navigatePrevious();
+      } else {
+        window.location.href = 'onlinebanking-home.html';
+      }
+    }
+
+    // Update step display
+    function updateStepDisplay() {
+      // Hide all steps
+      for (let i = 1; i <= totalSteps; i++) {
+        const stepElement = document.getElementById(`kyc-step-${i}`);
+        if (stepElement) {
+          stepElement.style.display = i === currentStep ? 'block' : 'none';
+        }
+      }
+
+      // Update progress indicators
+      updateProgressIndicators();
+      
+      // Update navigation buttons
+      updateNavigationButtons();
+    }
+
+    // Update progress indicators
+    function updateProgressIndicators() {
+      const progressContainer = document.getElementById('progress-steps');
+      const stepItems = document.querySelectorAll('.kyc-step-item');
+      
+      // Update progress line
+      progressContainer.className = `kyc-steps-container step-${currentStep}`;
+      
+      // Update step items
+      stepItems.forEach((item, index) => {
+        const stepNumber = index + 1;
+        item.classList.remove('active', 'completed');
+        
+        if (stepNumber < currentStep) {
+          item.classList.add('completed');
+        } else if (stepNumber === currentStep) {
+          item.classList.add('active');
+        }
+      });
+    }
+
+    // Update navigation buttons
+    function updateNavigationButtons() {
+      const backButton = document.getElementById('back-button');
+      const nextButton = document.getElementById('next-button');
+      const submitButton = document.getElementById('submit-button');
+      
+      // Always show back button
+      backButton.style.display = 'inline-block';
+      backButton.textContent = currentStep > 1 ? 'Previous' : 'Back to Dashboard';
+      
+      // Show/hide next and submit buttons
+      if (currentStep === totalSteps) {
+        nextButton.style.display = 'none';
+        submitButton.style.display = 'none';
+      } else if (currentStep === totalSteps - 1) {
+        nextButton.style.display = 'none';
+        submitButton.style.display = 'inline-block';
+      } else {
+        nextButton.style.display = 'inline-block';
+        submitButton.style.display = 'none';
+      }
+    }
+
+    // Submit KYC form
+    function submitKYCForm() {
+      const submitButton = document.getElementById('submit-button');
+      submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Submitting...';
+      submitButton.disabled = true;
+      
+      setTimeout(() => {
+        currentStep = totalSteps;
+        updateStepDisplay();
+        submitButton.innerHTML = 'Submit KYC';
+        submitButton.disabled = false;
+        scrollToTop();
+      }, 2000);
+    }
+
+    // File upload functions
+    function triggerUpload(inputId) {
+      document.getElementById(inputId).click();
+    }
+
+
+
+    // Scroll to top function
+    function scrollToTop() {
+      document.querySelector('.kyc-progress-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeKYC();
+      
+      // File upload handling
+      const fileInputs = document.querySelectorAll('input[type="file"]');
+      fileInputs.forEach(input => {
+        input.addEventListener('change', function() {
+          if (this.files.length > 0) {
+            const uploadCard = this.previousElementSibling;
+            if (uploadCard && uploadCard.classList.contains('upload-document-card')) {
+              uploadCard.classList.add('file-uploaded');
+              
+              const icon = uploadCard.querySelector('.upload-icon');
+              const text = uploadCard.querySelector('.upload-text');
+              
+              if (icon) icon.className = 'icon_check upload-icon';
+              if (text) text.innerHTML = `<strong>${this.files[0].name}</strong> uploaded successfully`;
+            }
+          }
+        });
+      });
+    });
+  </script>
+
+  <!-- JS Libraries -->
+  <script src="js/jquery-3.6.0.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/wow.min.js"></script>
+  <script>
+    new WOW().init();
+  </script>
+</body>
+</html> 
