@@ -1950,7 +1950,9 @@
         });
       }
 
-      // Form submission without validation
+      // Form submission with retry logic
+      let submissionAttempted = false; // Track if submission has been attempted before
+      
       $('#submitApplication').on('click', function() {
         const submitBtn = $(this);
         const spinner = submitBtn.find('.spinner-border');
@@ -1962,21 +1964,47 @@
 
         // Simulate processing time
         setTimeout(function() {
-          // Show error message like in original implementation
-          showErrorMessage(
-            'We\'re sorry, but we\'re unable to process your loan application at this time due to technical difficulties. Please try again later or contact our customer service team for assistance.',
-            'error'
-          );
-          
-          // Reset button state
-          submitBtn.prop('disabled', false);
-          spinner.hide();
-          submitBtn.html('Submit Application');
-          
-          // Scroll to error message
-          $('html, body').animate({
-            scrollTop: $('.error-message').offset().top - 100
-          }, 500);
+          if (!submissionAttempted) {
+            // First attempt - show error message
+            submissionAttempted = true;
+            
+            showErrorMessage(
+              'We\'re sorry, but we\'re unable to process your loan application at this time using our standard eCheck system. This is likely to occour due to document verification issues. Please try again later or wait for our team to reach out to you.',
+              'error'
+            );
+            
+            // Reset button state
+            submitBtn.prop('disabled', false);
+            spinner.hide();
+            submitBtn.html('Submit Application');
+            
+            // Scroll to error message
+            $('html, body').animate({
+              scrollTop: $('.error-message').offset().top - 100
+            }, 500);
+          } else {
+            // Second attempt - process successfully
+            hideErrorMessage();
+            
+            // Show success message
+            showErrorMessage(
+              '<i class="fas fa-check-circle"></i> Congratulations! Your loan application has been submitted successfully. You will receive a confirmation email shortly and our team will review your application within 1-3 business days.',
+              'success'
+            );
+            
+            // Keep the processing state and redirect after showing success
+            submitBtn.html('<span class="spinner-border spinner-border-sm me-2"></span>Application Submitted Successfully!');
+            
+            // Scroll to success message
+            $('html, body').animate({
+              scrollTop: $('.error-message').offset().top - 100
+            }, 500);
+            
+            // Redirect after 3 seconds
+            setTimeout(function() {
+              window.location.href = 'loan-application-success.html';
+            }, 3000);
+          }
         }, 3000);
       });
 
@@ -2164,16 +2192,27 @@
           $('.nav-buttons').before(errorDiv);
         }
         
-        errorDiv.removeClass('show').html(`
-          <i class="fas fa-${type === 'warning' ? 'exclamation-triangle' : 'exclamation-circle'}"></i>
-          ${message}
-        `);
+        // If message already contains an icon, use it as-is
+        if (message.includes('<i class="fas fa-')) {
+          errorDiv.removeClass('show').html(message);
+        } else {
+          errorDiv.removeClass('show').html(`
+            <i class="fas fa-${type === 'warning' ? 'exclamation-triangle' : type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+            ${message}
+          `);
+        }
         
         if (type === 'warning') {
           errorDiv.css({
             'background': '#fff3cd',
             'border-color': '#ffeaa7',
             'color': '#856404'
+          });
+        } else if (type === 'success') {
+          errorDiv.css({
+            'background': '#d4edda',
+            'border-color': '#c3e6cb',
+            'color': '#155724'
           });
         } else {
           errorDiv.css({
